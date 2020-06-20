@@ -9,12 +9,19 @@ import java.awt.ComponentOrientation;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.chrono.HijrahChronology;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+//miladi
+import java.time.chrono.HijrahDate;
+import java.time.chrono.HijrahEra;
+import java.time.format.DateTimeFormatter;
 
 
 
@@ -52,6 +59,8 @@ public class DateConvertor extends javax.swing.JFrame {
         jformatdate = new javax.swing.JFormattedTextField();
         combodate = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtmiladi = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("dateconvertor"); // NOI18N
@@ -86,10 +95,15 @@ public class DateConvertor extends javax.swing.JFrame {
         jformatdate.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
 
         combodate.setFont(new java.awt.Font("B Nazanin", 1, 14)); // NOI18N
-        combodate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "شمسی به میلادی", "میلادی به شمسی" }));
+        combodate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "شمسی به میلادی", "میلادی به شمسی", "میلادی به قمری", "قمری به میلادی", "شمسی به قمری", "قمری به شمسی" }));
 
         jLabel4.setFont(new java.awt.Font("B Nazanin", 1, 14)); // NOI18N
         jLabel4.setText("تبدیل");
+
+        jLabel5.setFont(new java.awt.Font("B Nazanin", 1, 14)); // NOI18N
+        jLabel5.setText("قمری");
+
+        txtmiladi.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,21 +112,23 @@ public class DateConvertor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jtxtmiadi)
+                    .addComponent(txtmiladi, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtshamsi, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtmiadi)
                     .addComponent(jformatdate, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(combodate, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(jButton1)
-                .addGap(119, 119, 119))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,14 +147,18 @@ public class DateConvertor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtmiadi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtxtshamsi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(txtmiladi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(304, 283));
+        setSize(new java.awt.Dimension(304, 290));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -201,9 +221,109 @@ public class DateConvertor extends javax.swing.JFrame {
         jtxtshamsi.setText(jCal.toString());
         }
 
+         if((String)combodate.getSelectedItem()=="میلادی به قمری")
+        {
+        //تقویم قمری
+        
+        // March 20th 2018
+        LocalDate dt = LocalDate.of(y, m, d);
+
+        // convert to hijrah
+        HijrahDate hijrahDate = HijrahDate.from(dt);
+
+        // format to MM/DD/YYYY
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String formatted = formatter.format(hijrahDate); // 07/03/1439
+        System.out.println(formatted);
+        txtmiladi.setText(formatted);    
+
+        }
+         
+         if((String)combodate.getSelectedItem()=="قمری به میلادی")
+        {
+        //تقویم قمری
+        
+        HijrahDate hd = HijrahChronology.INSTANCE.date(HijrahEra.AH, y, m, d);
+        LocalDate ld = LocalDate.from(hd);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String formatted = formatter.format(ld); // 07/03/1439
+        System.out.println("قمری به میلادی " + ld); // java-8: 2015-08-03 
+        jtxtmiadi.setText(formatted);    
+
+        }
+         
+         
+         if((String)combodate.getSelectedItem()=="قمری به شمسی")
+        {
+        //تقویم قمری
+            
+        HijrahDate hd = HijrahChronology.INSTANCE.date(HijrahEra.AH, y, m, d);
+        LocalDate ld = LocalDate.from(hd);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String formatted = formatter.format(ld); // 07/03/1439
+        System.out.println("قمری به میلادی " + ld); // java-8: 2015-08-03 
+        
+        
+       //میلادی
+        String year1 = formatted;
+        String mon1 = formatted;
+        String day1 = formatted;
+        
+        yearsubstr = year1.substring(0, 4);
+        monsubstr = mon1.substring(5, 7);
+        daysubstr = day1.substring(8, 10);
+        
+        int y1=Integer.parseInt(yearsubstr);  
+        int m1=Integer.parseInt(monsubstr);  
+        int d1=Integer.parseInt(daysubstr);
+        //میلادی
+        jCal.GregorianToPersian(y1,m1,d1);
+        jCal.toString();
+        System.out.println("تبدیل تاریخ میلادی به شمسی: :" + jCal.toString());
+        jtxtshamsi.setText(jCal.toString());
         
 
+        }
+         
+         if((String)combodate.getSelectedItem()=="شمسی به قمری")
+        {
+        //تقویم قمری
+            
+        jCal.PersianToGregorian(y,m,d);
+        System.out.println("تبدیل تاریخ شمسی به میلادی:" + jCal.toString());
         
+        
+        
+       //میلادی
+        String year1 = jCal.toString();
+        String mon1 = jCal.toString();
+        String day1 = jCal.toString();
+        
+        yearsubstr = year1.substring(0, 4);
+        monsubstr = mon1.substring(5, 7);
+        daysubstr = day1.substring(8, 10);
+        
+        int y1=Integer.parseInt(yearsubstr);  
+        int m1=Integer.parseInt(monsubstr);  
+        int d1=Integer.parseInt(daysubstr);
+        //میلادی
+        
+        // March 20th 2018
+        LocalDate dt = LocalDate.of(y1, m1, d1);
+
+        // convert to hijrah
+        HijrahDate hijrahDate = HijrahDate.from(dt);
+
+        // format to MM/DD/YYYY
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String formatted = formatter.format(hijrahDate); // 07/03/1439
+        System.out.println(formatted);
+        txtmiladi.setText(formatted);    
+        
+
+        }
+         
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -249,8 +369,10 @@ public class DateConvertor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JFormattedTextField jformatdate;
     private javax.swing.JTextField jtxtmiadi;
     private javax.swing.JTextField jtxtshamsi;
+    private javax.swing.JTextField txtmiladi;
     // End of variables declaration//GEN-END:variables
 }
