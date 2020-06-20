@@ -205,7 +205,7 @@ public class DateConvertor extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here: "yyyy/MM/dd" "yyyy/MM/dd hh:mm:ss"
         
-        //شروع گرفتن اعداد قبل از اسلش از تکست باکس
+        //شروع گرفتن اعداد از تکست باکس
         
         
         String yearsubstr = "";
@@ -220,7 +220,7 @@ public class DateConvertor extends javax.swing.JFrame {
         yearsubstr = year.substring(0, 4);
         monsubstr = mon.substring(5, 7);
         daysubstr = day.substring(8, 10);
-        //پایان گرفتن اعداد قبل از اسلش از تکست باکس
+        //شروع گرفتن اعداد از تکست باکس
        
 
         
@@ -243,25 +243,31 @@ public class DateConvertor extends javax.swing.JFrame {
         shamsi jCal = new shamsi(); // ایجاد یک نمونه از کلاس تبدیل تاریخ
         jCal.GregorianToPersian(mYear, mMonth, mDay); // دادن تاریخ کنونی سیستم به متد تبدیل تاریخ میلادی به شمسی
 
-        if((String)combodate.getSelectedItem()=="شمسی به میلادی")
+
+
+
+
+
+
+        if((String)combodate.getSelectedItem()=="شمسی به میلادی/shamsi to gregorian")
         {
             //تبدیل تاریخ شمسی به میلادی:
         jCal.PersianToGregorian(y,m,d);
-        System.out.println("تبدیل تاریخ شمسی به میلادی:" + jCal.toString());
+        
         jtxtmiadi.setText(jCal.toString());
         }
         
         
-        if((String)combodate.getSelectedItem()=="میلادی به شمسی")
+        if((String)combodate.getSelectedItem()=="میلادی به شمسی/gregorian to shamsi")
         {
             //تبدیل تاریخ میلادی به شمسی:
         jCal.GregorianToPersian(y,m,d);
         jCal.toString();
-        System.out.println("تبدیل تاریخ میلادی به شمسی: :" + jCal.toString());
+       
         jtxtshamsi.setText(jCal.toString());
         }
 
-         if((String)combodate.getSelectedItem()=="میلادی به قمری")
+         if((String)combodate.getSelectedItem()=="میلادی به قمری/gregorian to hijri")
         {
         //تقویم قمری
         
@@ -274,12 +280,12 @@ public class DateConvertor extends javax.swing.JFrame {
         // format to MM/DD/YYYY
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String formatted = formatter.format(hijrahDate); // 07/03/1439
-        System.out.println(formatted);
+        System.out.println("DATE= "+formatted);
         txtmiladi.setText(formatted);    
 
         }
          
-         if((String)combodate.getSelectedItem()=="قمری به میلادی")
+         if((String)combodate.getSelectedItem()=="قمری به میلادی/hijri to gregorian")
         {
         //تقویم قمری
         
@@ -287,50 +293,18 @@ public class DateConvertor extends javax.swing.JFrame {
         LocalDate ld = LocalDate.from(hd);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String formatted = formatter.format(ld); // 07/03/1439
-        System.out.println("قمری به میلادی " + ld); // java-8: 2015-08-03 
+        System.out.println("DATE= "+formatted);
+        
         jtxtmiadi.setText(formatted);    
 
         }
          
-         
-         if((String)combodate.getSelectedItem()=="قمری به شمسی")
-        {
-        //تقویم قمری
-            
-        HijrahDate hd = HijrahChronology.INSTANCE.date(HijrahEra.AH, y, m, d);
-        LocalDate ld = LocalDate.from(hd);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        String formatted = formatter.format(ld); // 07/03/1439
-        System.out.println("قمری به میلادی " + ld); // java-8: 2015-08-03 
-        
-        
-       //میلادی
-        String year1 = formatted;
-        String mon1 = formatted;
-        String day1 = formatted;
-        
-        yearsubstr = year1.substring(0, 4);
-        monsubstr = mon1.substring(5, 7);
-        daysubstr = day1.substring(8, 10);
-        
-        int y1=Integer.parseInt(yearsubstr);  
-        int m1=Integer.parseInt(monsubstr);  
-        int d1=Integer.parseInt(daysubstr);
-        //میلادی
-        jCal.GregorianToPersian(y1,m1,d1);
-        jCal.toString();
-        System.out.println("تبدیل تاریخ میلادی به شمسی: :" + jCal.toString());
-        jtxtshamsi.setText(jCal.toString());
-        
-
-        }
-         
-         if((String)combodate.getSelectedItem()=="شمسی به قمری")
+         if((String)combodate.getSelectedItem()=="شمسی به قمری/shamsi to hijri")
         {
         //تقویم قمری
             
         jCal.PersianToGregorian(y,m,d);
-        System.out.println("تبدیل تاریخ شمسی به میلادی:" + jCal.toString());
+        
         
         
         
@@ -357,11 +331,45 @@ public class DateConvertor extends javax.swing.JFrame {
         // format to MM/DD/YYYY
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String formatted = formatter.format(hijrahDate); // 07/03/1439
-        System.out.println(formatted);
+        System.out.println("DATE= "+formatted);
         txtmiladi.setText(formatted);    
         
 
         }
+         
+         if((String)combodate.getSelectedItem()=="قمری به شمسی/hijri to shamsi")
+        {
+        //تقویم قمری
+            
+        HijrahDate hd = HijrahChronology.INSTANCE.date(HijrahEra.AH, y, m, d);
+        LocalDate ld = LocalDate.from(hd);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String formatted = formatter.format(ld); // 07/03/1439
+        
+        
+        
+       //میلادی
+        String year1 = formatted;
+        String mon1 = formatted;
+        String day1 = formatted;
+        
+        yearsubstr = year1.substring(0, 4);
+        monsubstr = mon1.substring(5, 7);
+        daysubstr = day1.substring(8, 10);
+        
+        int y1=Integer.parseInt(yearsubstr);  
+        int m1=Integer.parseInt(monsubstr);  
+        int d1=Integer.parseInt(daysubstr);
+        //میلادی
+        jCal.GregorianToPersian(y1,m1,d1);
+        jCal.toString();
+       
+        jtxtshamsi.setText(jCal.toString());
+        
+
+        }
+         
+         
          
          
     }//GEN-LAST:event_jButton1ActionPerformed
