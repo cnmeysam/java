@@ -134,6 +134,8 @@ public class cap extends javax.swing.JFrame {
         }
         else{
              JOptionPane.showMessageDialog(null, "false");
+             createcaptchavalue();
+        lblcaptcha.setText(createcaptchavalue().toLowerCase());
         }
         
     }//GEN-LAST:event_btncaptchaActionPerformed
