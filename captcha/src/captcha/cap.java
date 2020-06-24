@@ -5,22 +5,46 @@
  */
 package captcha;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.io.File;
 import java.util.Random;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 /**
  *
  * @author Admin
  */
 public class cap extends javax.swing.JFrame {
-
+private static Icon icon = new ImageIcon("icon/back.png");
     /**
      * Creates new form cap
      */
+protected static JLabel makeLabel(int vert, int horiz) {
+    JLabel l = new JLabel("Smile", icon, SwingConstants.CENTER);
+    l.setVerticalTextPosition(vert);
+    l.setHorizontalTextPosition(horiz);
+    l.setBorder(BorderFactory.createLineBorder(Color.black));
+    return l;
+  }
     public cap() {
         initComponents();
+        
         createcaptchavalue();
-        lblcaptcha.setText(createcaptchavalue().toLowerCase());
+        
+            
+           lblcaptcha.setText(createcaptchavalue().toLowerCase());
+           lblcaptcha.setHorizontalTextPosition(JLabel.CENTER);
+           lblcaptcha.setVerticalTextPosition(JLabel.CENTER);
+        
+        
+        
     }
 
     public static String createcaptchavalue(){
@@ -64,9 +88,9 @@ public class cap extends javax.swing.JFrame {
     private void initComponents() {
 
         btncaptcha = new javax.swing.JButton();
-        lblcaptcha = new javax.swing.JLabel();
         txtcap = new javax.swing.JTextField();
         btnrefresh = new javax.swing.JButton();
+        lblcaptcha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -78,8 +102,6 @@ public class cap extends javax.swing.JFrame {
             }
         });
 
-        lblcaptcha.setText("jLabel1");
-
         btnrefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refreshsmall.png"))); // NOI18N
         btnrefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,21 +109,27 @@ public class cap extends javax.swing.JFrame {
             }
         });
 
+        lblcaptcha.setFont(new java.awt.Font("Cambria", 3, 48)); // NOI18N
+        lblcaptcha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/back.png"))); // NOI18N
+        lblcaptcha.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtcap, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btncaptcha))
-                .addContainerGap(20, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblcaptcha)
+                .addComponent(lblcaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnrefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btncaptcha)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtcap, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -109,20 +137,19 @@ public class cap extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(lblcaptcha)
-                        .addGap(13, 13, 13))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnrefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(lblcaptcha))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(btnrefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtcap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btncaptcha)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(184, 173));
+        setSize(new java.awt.Dimension(343, 166));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
