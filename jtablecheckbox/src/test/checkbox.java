@@ -25,6 +25,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import org.apache.commons.codec.binary.Base64;
@@ -84,7 +85,14 @@ public class checkbox extends javax.swing.JFrame {
 
                     CheckBoxRenderer checkBoxRenderer = new CheckBoxRenderer();
                     datatable.getColumnModel().getColumn(2).setCellRenderer(checkBoxRenderer);
-
+//                    datatable.setDefaultRenderer(CheckBoxRenderer.class, new CheckBoxRenderer());
+//                    UIManager.getLookAndFeelDefaults().put("Table:\"Table.cellRenderer\".background", Color.DARK_GRAY);
+//                    UIManager.getLookAndFeelDefaults().put("Table.background", new ColorUIResource(Color.DARK_GRAY));
+//                    UIManager.getLookAndFeelDefaults().put("Table.alternateRowColor", Color.GRAY.brighter());
+//                    datatable.getColumnModel().getColumn(2).setCellRenderer(datatable.getDefaultRenderer(Boolean.class));
+             
+                    
+                    
                 }//کد دی هش
                 catch (UnsupportedEncodingException ex) {
                     Logger.getLogger(checkbox.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,7 +113,8 @@ public class checkbox extends javax.swing.JFrame {
      */
     public checkbox() {
         initComponents();
-
+//        UIManager.put("Table.background", Color.BLUE);
+//        UIManager.put("Table.alternateRowColor", Color.BLUE);
         NonQuery();
         last();
     }
