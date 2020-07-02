@@ -212,7 +212,6 @@ public class checkbox extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblStart = new javax.swing.JLabel();
         BTNRefresh = new javax.swing.JButton();
-        BTNConnection = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -325,13 +324,6 @@ public class checkbox extends javax.swing.JFrame {
             }
         });
 
-        BTNConnection.setText("Connection");
-        BTNConnection.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNConnectionActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -343,8 +335,6 @@ public class checkbox extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BTNConnection)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BTNRefresh)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -352,16 +342,15 @@ public class checkbox extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNConnection)
-                    .addComponent(BTNRefresh))
+                .addComponent(BTNRefresh)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(602, 412));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnfirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfirstActionPerformed
@@ -455,17 +444,6 @@ public class checkbox extends javax.swing.JFrame {
         Refresh_Table();
     }//GEN-LAST:event_BTNRefreshActionPerformed
     private List<Double> values = new ArrayList<Double>();
-    private void BTNConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNConnectionActionPerformed
-        // TODO add your handling code here:
-        connaction frame = new connaction();
-        frame.setVisible(true);
-        
-//                    this.dispose();
-            
-
-
-    }//GEN-LAST:event_BTNConnectionActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -502,7 +480,6 @@ public class checkbox extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTNConnection;
     private javax.swing.JButton BTNRefresh;
     private javax.swing.JButton btnfirst;
     private javax.swing.JButton btnlast;
