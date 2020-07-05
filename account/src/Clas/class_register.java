@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 
 public class class_register {
+    public static int check ;
   public static String classError = "";
     public void NonQuery(String sql)
     {
@@ -44,19 +45,21 @@ while ((strDec = bufferedReader.readLine()) != null){
             
     }catch (Exception ex)
         {
-            
+//            CONSTRAINT
               classError = ex.getMessage();
-            if (classError.contains("CONSTRAINT")) {
-            //System.out.println("This Record Reference Is In Use In Another Form");
-            JOptionPane.showMessageDialog(null, "This Record Reference Is In Use In Another Form");
-        }
+            
             String jError = "";
                     jError = ex.getMessage();
             if (jError.contains("Miscsied.jar")) {
             //System.out.println("This Record Reference Is In Use In Another Form");
             JOptionPane.showMessageDialog(null, "check you'r Server connection Settings");
         }
-             if (jError.contains("The last packet")) {
+            else if (jError.contains("Cannot delete or update a parent row")) {
+            //System.out.println("This Record Reference Is In Use In Another Form");
+            JOptionPane.showMessageDialog(null, "This Record Reference Is In Use In Another Form");
+            check=1;
+        }
+             else if (jError.contains("The last packet")) {
             //System.out.println("This Record Reference Is In Use In Another Form");
             JOptionPane.showMessageDialog(null, "Can Not Connect To Server");
         }  

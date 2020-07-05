@@ -1,0 +1,3 @@
+In the library first you have to load swingx-all-1.6.4 and then load swingx-0.9.1 and confirm.
+
+در کتابخانه اول شما باید swingx-all-1.6.4 را بارگذاری کرده تایید کنید سپس swingx-0.9.1 را بارگذاری کرده و تایید نمایید

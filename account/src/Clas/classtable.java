@@ -95,10 +95,13 @@ public class classtable {
             //System.out.println("This Record Reference Is In Use In Another Form");
             JOptionPane.showMessageDialog(null, "check you'r Server connection Settings");
         }
-             if (jError.contains("The last packet")) {
+            else if (jError.contains("The last packet")) {
             //System.out.println("This Record Reference Is In Use In Another Form");
             JOptionPane.showMessageDialog(null, "Can Not Connect To Server");
         }  
+//           else if(jError.contains("shift")){
+//                JOptionPane.showMessageDialog(null, "This user in use shift form");
+//            }
             else{
                	
             ex.printStackTrace();

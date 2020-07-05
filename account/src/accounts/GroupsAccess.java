@@ -124,10 +124,7 @@ while ((strDec = bufferedReader.readLine()) != null){
      * Creates new form GroupsAccess
      */
     public GroupsAccess() {
-        //تغییر آیکن برنامه
-        ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("Icons/User Access.png"));
-        this.setFrameIcon(icon);
-        //تغییر آیکن برنامه
+        
         initComponents();
         LblID.setVisible(false);
         lblID.setVisible(false);
@@ -146,10 +143,10 @@ while ((strDec = bufferedReader.readLine()) != null){
         Clas.classtable obj = new Clas.classtable();
         DefaultTableModel dtm = obj.Query(sql);
         datatable.setModel(dtm);
-        lblpag.setText(String.valueOf(0));
+        lblpage.setText(String.valueOf(0));
 
         lblStart.setText("0");
-        lblpag.setText("0");
+        lblpage.setText("0");
         paging_Table();
         NonQuery();
 
@@ -184,11 +181,11 @@ while ((strDec = bufferedReader.readLine()) != null){
         Clas.classtable obj = new Clas.classtable();
         DefaultTableModel dtm = obj.Query(sql);
         datatable.setModel(dtm);
-        lblpag.setText(String.valueOf(0));
+        lblpage.setText(String.valueOf(0));
         
         int index = Integer.parseInt(lblall.getText());
         index = index/10;
-        lblpag.setText(String.valueOf(index));
+        lblpage.setText(String.valueOf(index));
         lblStart.setText(String.valueOf(index*10));
         NonQuery();
     }
@@ -249,7 +246,7 @@ while ((strDec = bufferedReader.readLine()) != null){
         jLabel23 = new javax.swing.JLabel();
         lblall = new javax.swing.JLabel();
         lblpag1 = new javax.swing.JLabel();
-        lblpag = new javax.swing.JLabel();
+        lblpage = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblStart = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
@@ -261,8 +258,8 @@ while ((strDec = bufferedReader.readLine()) != null){
         lbl_error = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         datatable = new javax.swing.JTable();
-        jMenuBar5 = new javax.swing.JMenuBar();
-        jMenu5 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
         menunew = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
         menusave = new javax.swing.JMenuItem();
@@ -278,6 +275,7 @@ while ((strDec = bufferedReader.readLine()) != null){
         setMaximizable(true);
         setResizable(true);
         setTitle("Groups Access");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icon_Form/groups_15px.png"))); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameActivated(evt);
@@ -639,7 +637,7 @@ while ((strDec = bufferedReader.readLine()) != null){
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -688,7 +686,7 @@ while ((strDec = bufferedReader.readLine()) != null){
                 .addComponent(txtsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(100, 100, 100)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblID)
@@ -707,8 +705,8 @@ while ((strDec = bufferedReader.readLine()) != null){
                     .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtsearch)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtsearch, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                            .addComponent(jLabel10)
                             .addComponent(LblID))
                         .addComponent(btnsearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(14, 14, 14))
@@ -764,8 +762,8 @@ while ((strDec = bufferedReader.readLine()) != null){
         lblpag1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblpag1.setText("Page");
 
-        lblpag.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        lblpag.setText("0");
+        lblpage.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        lblpage.setText("0");
 
         jLabel2.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         jLabel2.setText("Start");
@@ -782,11 +780,11 @@ while ((strDec = bufferedReader.readLine()) != null){
                 .addComponent(btnfirst, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnprevious, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(lblpag1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblpag)
-                .addGap(53, 53, 53)
+                .addComponent(lblpage)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblStart)
@@ -794,7 +792,7 @@ while ((strDec = bufferedReader.readLine()) != null){
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblall)
-                .addGap(90, 90, 90)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(btnnext, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnlast, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -802,31 +800,25 @@ while ((strDec = bufferedReader.readLine()) != null){
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnlast, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnnext, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(lblall, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnprevious, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnfirst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(lblStart)
-                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblpag1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblpag)))))
-                .addGap(1, 1, 1))
+                    .addComponent(btnprevious, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblpag1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblpage)
+                    .addComponent(jLabel2)
+                    .addComponent(lblStart)
+                    .addComponent(jLabel23)
+                    .addComponent(lblall, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnnext, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnlast, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        comboclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/back_25px.png"))); // NOI18N
+        comboclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icons/back_25px.png"))); // NOI18N
         comboclose.setToolTipText("Back");
         comboclose.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         comboclose.addActionListener(new java.awt.event.ActionListener() {
@@ -835,7 +827,7 @@ while ((strDec = bufferedReader.readLine()) != null){
             }
         });
 
-        btndelet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/delete_25px.png"))); // NOI18N
+        btndelet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icons/delete_25px.png"))); // NOI18N
         btndelet.setToolTipText("Delete");
         btndelet.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btndelet.addActionListener(new java.awt.event.ActionListener() {
@@ -844,7 +836,7 @@ while ((strDec = bufferedReader.readLine()) != null){
             }
         });
 
-        btnregister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/save_25px.png"))); // NOI18N
+        btnregister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icons/save_25px.png"))); // NOI18N
         btnregister.setToolTipText("Save");
         btnregister.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnregister.addActionListener(new java.awt.event.ActionListener() {
@@ -853,7 +845,7 @@ while ((strDec = bufferedReader.readLine()) != null){
             }
         });
 
-        btnedit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/edit_20px.png"))); // NOI18N
+        btnedit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icons/edit_20px.png"))); // NOI18N
         btnedit.setToolTipText("Edit");
         btnedit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnedit.addActionListener(new java.awt.event.ActionListener() {
@@ -862,7 +854,7 @@ while ((strDec = bufferedReader.readLine()) != null){
             }
         });
 
-        btnnew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/new_25px.png"))); // NOI18N
+        btnnew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icons/new_25px.png"))); // NOI18N
         btnnew.setToolTipText("New");
         btnnew.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnnew.addActionListener(new java.awt.event.ActionListener() {
@@ -881,9 +873,9 @@ while ((strDec = bufferedReader.readLine()) != null){
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(comboclose, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbl_error)
-                .addGap(148, 148, 148)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(btndelet, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnregister, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -891,7 +883,7 @@ while ((strDec = bufferedReader.readLine()) != null){
                 .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnnew, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -902,10 +894,8 @@ while ((strDec = bufferedReader.readLine()) != null){
                     .addComponent(btnregister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnedit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnnew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lbl_error)))
-                .addContainerGap())
+                    .addComponent(lbl_error, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         datatable.setAutoCreateRowSorter(true);
@@ -918,65 +908,65 @@ while ((strDec = bufferedReader.readLine()) != null){
         });
         jScrollPane2.setViewportView(datatable);
 
-        jMenu5.setText("File");
+        jMenu3.setText("File");
 
         menunew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        menunew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/new_15px.png"))); // NOI18N
+        menunew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icon_Bar/new_15px.png"))); // NOI18N
         menunew.setText("New");
         menunew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menunewActionPerformed(evt);
             }
         });
-        jMenu5.add(menunew);
-        jMenu5.add(jSeparator7);
+        jMenu3.add(menunew);
+        jMenu3.add(jSeparator7);
 
         menusave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        menusave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/save_15px.png"))); // NOI18N
+        menusave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icon_Bar/save_15px.png"))); // NOI18N
         menusave.setText("Save");
         menusave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menusaveActionPerformed(evt);
             }
         });
-        jMenu5.add(menusave);
-        jMenu5.add(jSeparator4);
+        jMenu3.add(menusave);
+        jMenu3.add(jSeparator4);
 
         menuedit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        menuedit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/edit_15px.png"))); // NOI18N
+        menuedit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icon_Bar/edit_15px.png"))); // NOI18N
         menuedit.setText("Edit");
         menuedit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menueditActionPerformed(evt);
             }
         });
-        jMenu5.add(menuedit);
-        jMenu5.add(jSeparator8);
+        jMenu3.add(menuedit);
+        jMenu3.add(jSeparator8);
 
         menudelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
-        menudelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/delete_15px.png"))); // NOI18N
+        menudelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icon_Bar/delete_15px.png"))); // NOI18N
         menudelete.setText("Delete");
         menudelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menudeleteActionPerformed(evt);
             }
         });
-        jMenu5.add(menudelete);
-        jMenu5.add(jSeparator9);
+        jMenu3.add(menudelete);
+        jMenu3.add(jSeparator9);
 
         menuclose.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
-        menuclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/close_15px.png"))); // NOI18N
+        menuclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture_Icon_Bar/close_15px.png"))); // NOI18N
         menuclose.setText("Close");
         menuclose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menucloseActionPerformed(evt);
             }
         });
-        jMenu5.add(menuclose);
+        jMenu3.add(menuclose);
 
-        jMenuBar5.add(jMenu5);
+        jMenuBar3.add(jMenu3);
 
-        setJMenuBar(jMenuBar5);
+        setJMenuBar(jMenuBar3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1004,7 +994,7 @@ while ((strDec = bufferedReader.readLine()) != null){
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
         );
 
         pack();
@@ -1012,7 +1002,7 @@ while ((strDec = bufferedReader.readLine()) != null){
 
     private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchActionPerformed
         // TODO add your handling code here:
-        String sql = "select ID,groupname FROM groupnodeaccess WHERE groupname='"+txtsearch.getText()+"'  ";
+        String sql = "select ID,groupname FROM groupnodeaccess WHERE groupname LIKE '%"+txtsearch.getText()+"%'  ";
         Clas.classtable obj = new Clas.classtable();
         DefaultTableModel dtm = obj.Query(sql);
         datatable.setModel(dtm);
@@ -1032,7 +1022,7 @@ while ((strDec = bufferedReader.readLine()) != null){
 
     private void btnpreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpreviousActionPerformed
         // TODO add your handling code here:
-        int n = Integer.parseInt(lblpag.getText());
+        int n = Integer.parseInt(lblpage.getText());
         if (n <= 0) {
             btnprevious.setEnabled(false);
             JOptionPane.showMessageDialog(null,
@@ -1050,7 +1040,7 @@ while ((strDec = bufferedReader.readLine()) != null){
             DefaultTableModel dtm = obj.Query(sql);
             if (dtm.getRowCount() > 0) {
                 lblStart.setText(String.valueOf(index));
-                lblpag.setText(String.valueOf(index / 10));
+                lblpage.setText(String.valueOf(index / 10));
                 datatable.setModel(dtm);
 
                 paging_Table();
@@ -1063,7 +1053,7 @@ while ((strDec = bufferedReader.readLine()) != null){
 
     private void btnnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextActionPerformed
         // TODO add your handling code here:
-        String a = lblpag.getText();
+        String a = lblpage.getText();
         String b = lblall.getText();
 
         if (Integer.parseInt(a) >= Integer.parseInt(b)/10) {
@@ -1085,7 +1075,7 @@ while ((strDec = bufferedReader.readLine()) != null){
             DefaultTableModel dtm = obj.Query(sql);
             if (dtm.getRowCount() > 0) {
                 lblStart.setText(String.valueOf(index));
-                lblpag.setText(String.valueOf(index / 10));
+                lblpage.setText(String.valueOf(index / 10));
                 datatable.setModel(dtm);
 
                 paging_Table();
@@ -1118,9 +1108,17 @@ while ((strDec = bufferedReader.readLine()) != null){
         String sql = "delete from groupnodeaccess where ID='%s'";
         sql = String.format(sql, id);
         obj.NonQuery(sql);
-        
+        if(Clas.class_register.check ==1){
+             lbl_error.setForeground(Color.RED);
+        lbl_error.setText(txtgroup.getText()+ " (This Record Reference Is In Use In Another Form!)");
+         }
+         else{
         lbl_error.setForeground(Color.RED);
         lbl_error.setText(txtgroup.getText()+ "  removed!");
+         }
+        
+       
+        
         last();
         paging_Table();
         NonQuery();
@@ -1136,7 +1134,10 @@ while ((strDec = bufferedReader.readLine()) != null){
     public void save() {
     
         if(txtgroup.getText().equals("")){
-        JOptionPane.showMessageDialog(null, "Group Name Can't Empty");
+       JOptionPane.showMessageDialog(null,
+                "Group Name can't be empty",
+                "Warning!",
+                JOptionPane.WARNING_MESSAGE);
         }
         else{
         for(int i = 1; i <= 160; i +=5)
@@ -1790,8 +1791,11 @@ else
         {
             lbl_error.setText("Pleas Select a Row!");
         }
-        if(txtgroup.getText().equals("")){
-        JOptionPane.showMessageDialog(null, "Group Name Can't Empty");
+        else if(txtgroup.getText().equals("")){
+        JOptionPane.showMessageDialog(null,
+                "Group Name can't be empty",
+                "Warning!",
+                JOptionPane.WARNING_MESSAGE);
         }else{
         
         //شروع باز شدن درخت واره چک باکس مورد نظر
@@ -2439,31 +2443,6 @@ else
         empty();
     }//GEN-LAST:event_btnnewActionPerformed
 
-    private void menunewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menunewActionPerformed
-        // TODO add your handling code here:
-        empty();
-    }//GEN-LAST:event_menunewActionPerformed
-
-    private void menusaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menusaveActionPerformed
-        // TODO add your handling code here:
-        save();
-    }//GEN-LAST:event_menusaveActionPerformed
-
-    private void menueditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menueditActionPerformed
-        // TODO add your handling code here:
-        edit();
-    }//GEN-LAST:event_menueditActionPerformed
-
-    private void menudeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menudeleteActionPerformed
-        // TODO add your handling code here:
-        delete();
-    }//GEN-LAST:event_menudeleteActionPerformed
-
-    private void menucloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menucloseActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_menucloseActionPerformed
-
     private void datatableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datatableMouseClicked
        
         for(int ii = 1; ii <= 160; ii +=5)
@@ -2542,6 +2521,31 @@ else
         NonQuery();
     }//GEN-LAST:event_formInternalFrameActivated
 
+    private void menunewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menunewActionPerformed
+        // TODO add your handling code here:
+        empty();
+    }//GEN-LAST:event_menunewActionPerformed
+
+    private void menusaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menusaveActionPerformed
+        // TODO add your handling code here:
+        save();
+    }//GEN-LAST:event_menusaveActionPerformed
+
+    private void menueditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menueditActionPerformed
+        // TODO add your handling code here:
+        edit();
+    }//GEN-LAST:event_menueditActionPerformed
+
+    private void menudeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menudeleteActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_menudeleteActionPerformed
+
+    private void menucloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menucloseActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_menucloseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblID;
@@ -2562,8 +2566,8 @@ else
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar5;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -2580,8 +2584,8 @@ else
     private javax.swing.JLabel lbl_error;
     private javax.swing.JLabel lblall;
     private javax.swing.JLabel lblchecked;
-    private javax.swing.JLabel lblpag;
     private javax.swing.JLabel lblpag1;
+    private javax.swing.JLabel lblpage;
     private javax.swing.JMenuItem menuclose;
     private javax.swing.JMenuItem menudelete;
     private javax.swing.JMenuItem menuedit;

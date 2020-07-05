@@ -6,8 +6,6 @@
 package main;
 
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Toolkit;
 import javax.swing.JInternalFrame;
 
 /**
@@ -16,33 +14,20 @@ import javax.swing.JInternalFrame;
  */
 public class frmmain extends javax.swing.JFrame {
 
-    
-Image getIcon()
-        { 
-        return Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("Icons/Final price.png"));
-        }
+     public frmmain(String per) {
+        initComponents();
+        menuuser.setText(per);
+
+    }
+
     /**
      * Creates new form frmmain
      */
     public frmmain() {
-        //تغییر آیکن برنامه
-        setIconImage(getIcon());
-        //تغییر آیکن برنامه
         initComponents();
         setExtendedState(frmmain.MAXIMIZED_BOTH);
-       
     }
 
-    //دریافت شماره پرونده از فرم قبلی
-    public frmmain (String per){
-	initComponents();
-        menuuser.setText(per);
-    
-	}
-    
-    
-    //دریافت شماره پرونده از فرم قبلی
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,19 +42,15 @@ Image getIcon()
         jScrollPane = new javax.swing.JScrollPane();
         jXTaskPaneContainer = new org.jdesktop.swingx.JXTaskPaneContainer();
         jXTaskPane = new org.jdesktop.swingx.JXTaskPane();
-        lblpassword = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         lblgroupaccess = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator1 = new javax.swing.JSeparator();
         lblposition = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
         lblshifttype = new javax.swing.JLabel();
-        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
         lblusers = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
         lblshift = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -109,26 +90,6 @@ Image getIcon()
         jXTaskPane.setToolTipText("");
         jXTaskPane.setFont(new java.awt.Font("Cambria", 3, 16)); // NOI18N
 
-        lblpassword.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        lblpassword.setText("Change My Password");
-        lblpassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblpassword.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblpasswordMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblpasswordMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblpasswordMouseExited(evt);
-            }
-        });
-        jXTaskPane.getContentPane().add(lblpassword);
-
-        jSeparator1.setMinimumSize(new java.awt.Dimension(20, 5));
-        jSeparator1.setPreferredSize(new java.awt.Dimension(20, 5));
-        jXTaskPane.getContentPane().add(jSeparator1);
-
         lblgroupaccess.setBackground(new java.awt.Color(204, 204, 204));
         lblgroupaccess.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lblgroupaccess.setText("Group Access");
@@ -145,7 +106,10 @@ Image getIcon()
             }
         });
         jXTaskPane.getContentPane().add(lblgroupaccess);
-        jXTaskPane.getContentPane().add(jSeparator2);
+
+        jSeparator1.setMinimumSize(new java.awt.Dimension(20, 5));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(20, 5));
+        jXTaskPane.getContentPane().add(jSeparator1);
 
         lblposition.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lblposition.setText("Positions");
@@ -162,7 +126,7 @@ Image getIcon()
             }
         });
         jXTaskPane.getContentPane().add(lblposition);
-        jXTaskPane.getContentPane().add(jSeparator3);
+        jXTaskPane.getContentPane().add(jSeparator2);
 
         lblshifttype.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lblshifttype.setText("Shift Type");
@@ -179,7 +143,7 @@ Image getIcon()
             }
         });
         jXTaskPane.getContentPane().add(lblshifttype);
-        jXTaskPane.getContentPane().add(jSeparator4);
+        jXTaskPane.getContentPane().add(jSeparator3);
 
         lblusers.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lblusers.setText("Users");
@@ -196,7 +160,7 @@ Image getIcon()
             }
         });
         jXTaskPane.getContentPane().add(lblusers);
-        jXTaskPane.getContentPane().add(jSeparator5);
+        jXTaskPane.getContentPane().add(jSeparator4);
 
         lblshift.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lblshift.setText("Shift");
@@ -213,15 +177,6 @@ Image getIcon()
             }
         });
         jXTaskPane.getContentPane().add(lblshift);
-        jXTaskPane.getContentPane().add(jSeparator6);
-
-        jLabel1.setText("Positions_1 jtable checkbox test");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-        jXTaskPane.getContentPane().add(jLabel1);
 
         jXTaskPaneContainer.add(jXTaskPane);
 
@@ -456,74 +411,8 @@ Image getIcon()
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        //تغییر آیکن برنامه
-        setIconImage(getIcon());
-        //تغییر آیکن برنامه
+        
     }//GEN-LAST:event_formWindowActivated
-
-    
-    private void lblpasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpasswordMouseClicked
-        // TODO add your handling code here:
-        JInternalFrame iframe = Clas.class_singleton.ChangePassword();
-            iframe.toFront();
-      if(!DesktopPane.isAncestorOf(iframe)){
-		DesktopPane.add(iframe);
-                
-        	iframe.setVisible(true);
-                
-//               String per = menuuser.getText();
-//        	newiframe(per).setVisible(true);
-                
-               
-//                //ماکسیمایز کردن اینترنال فریم
-//                try {
-//            iframe.setMaximum(true);
-//         }
-//         catch(java.beans.PropertyVetoException e) {
-//         }
-//                 //ماکسیمایز کردن اینترنال فریم
-	}
-	else{
-		DesktopPane.setSelectedFrame(iframe);
-	     }
-    }//GEN-LAST:event_lblpasswordMouseClicked
-
-    private void lblpasswordMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpasswordMouseExited
-        // TODO add your handling code here:
-        //تغییر فونت لیبل وقتی ماوس میره روش شروع
-        Font font = new Font("cambria",Font.PLAIN ,14);
-        lblpassword.setFont(font);
-        //تغییر فونت لیبل وقتی ماوس میره روش پایان
-    }//GEN-LAST:event_lblpasswordMouseExited
-
-    private void lblpasswordMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpasswordMouseEntered
-        // TODO add your handling code here:
-        //تغییر فونت لیبل وقتی ماوس میره روش شروع
-        Font font = new Font("cambria",Font.BOLD ,14);
-        lblpassword.setFont(font);
-        //تغییر فونت لیبل وقتی ماوس میره روش پایان
-    }//GEN-LAST:event_lblpasswordMouseEntered
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-         JInternalFrame iframe = Clas.class_singleton.Positions_1();
-            iframe.toFront();
-      if(!DesktopPane.isAncestorOf(iframe)){
-		DesktopPane.add(iframe);
-        	iframe.setVisible(true);
-               
-                //ماکسیمایز کردن اینترنال فریم
-                try {
-            iframe.setMaximum(true);
-         }
-         catch(java.beans.PropertyVetoException e) {
-         }
-                 //ماکسیمایز کردن اینترنال فریم
-	}
-	else{
-		DesktopPane.setSelectedFrame(iframe);
-	     }
-    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -563,7 +452,6 @@ Image getIcon()
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;
     private com.bolivia.panel.JCPanel jCPanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -572,18 +460,13 @@ Image getIcon()
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
     private org.jdesktop.swingx.JXTaskPane jXTaskPane;
     private org.jdesktop.swingx.JXTaskPaneContainer jXTaskPaneContainer;
     private javax.swing.JLabel lblgroupaccess;
-    private javax.swing.JLabel lblpassword;
     private javax.swing.JLabel lblposition;
     private javax.swing.JLabel lblshift;
     private javax.swing.JLabel lblshifttype;
     private javax.swing.JLabel lblusers;
     public static javax.swing.JMenu menuuser;
     // End of variables declaration//GEN-END:variables
-
-
 }

@@ -29,6 +29,14 @@ public class ChangePassword extends javax.swing.JInternalFrame {
     //شروع نمایش نام کاربری در لیبل
     
     public void lbl(){
+        //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
+        String firstWord = lbluserpass.getText();
+     if(firstWord.contains(" ")){
+        firstWord= firstWord.substring(0, firstWord.indexOf(" ")); 
+//       jLabel1.setText(firstWord);
+//       jTextField1.setText(firstWord);
+     }
+     //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
         
         try
     {
@@ -50,7 +58,7 @@ while ((strDec = bufferedReader.readLine()) != null){
             Connection con = DriverManager.getConnection(url);
             Statement st =con.createStatement();
             st = con.createStatement();
-            String s = "SELECT * FROM users WHERE code='"+lbluserpass.getText()+"'";
+            String s = "SELECT * FROM users WHERE code='"+firstWord+"'";
             rs = st.executeQuery(s);
             while(rs.next()){
                 lblusername.setText(rs.getString("username"));
@@ -80,16 +88,14 @@ while ((strDec = bufferedReader.readLine()) != null){
      */
     public ChangePassword() {
         
-       //تغییر آیکن برنامه
-        ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("Icons/User Access.png"));
-        this.setFrameIcon(icon);
-        //تغییر آیکن برنامه
+       
         //کلید پیشفرض
         this.getRootPane().setDefaultButton(btnsave);
         initComponents();
         lblhash.setVisible(false);
         lblhashold.setVisible(false);
         combopermission.setVisible(false);
+        lblusername.setVisible(false);
         
         //شروع نمایش نام کاربری در لیبل
         lbluserpass.setText( main.frmmain.menuuser.getText());
@@ -120,6 +126,7 @@ while ((strDec = bufferedReader.readLine()) != null){
 
         setClosable(true);
         setIconifiable(true);
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/Password_Icon.png"))); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameActivated(evt);
@@ -138,10 +145,13 @@ while ((strDec = bufferedReader.readLine()) != null){
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         jLabel1.setText("Old Password");
 
+        jLabel2.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         jLabel2.setText("New Password");
 
+        btnsave.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         btnsave.setText("Save");
         btnsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,8 +178,8 @@ while ((strDec = bufferedReader.readLine()) != null){
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtold, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
@@ -199,13 +209,13 @@ while ((strDec = bufferedReader.readLine()) != null){
                     .addComponent(lblusername))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtold, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtnew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnew, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnsave)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -243,6 +253,14 @@ while ((strDec = bufferedReader.readLine()) != null){
     Statement st;
     ResultSet rs; 
     private void permissions() {
+        //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
+        String firstWord = lbluserpass.getText();
+     if(firstWord.contains(" ")){
+        firstWord= firstWord.substring(0, firstWord.indexOf(" ")); 
+//       jLabel1.setText(firstWord);
+//       jTextField1.setText(firstWord);
+     }
+     //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
        
          combopermission.removeAllItems();  
          try
@@ -265,7 +283,7 @@ while ((strDec = bufferedReader.readLine()) != null){
             Connection con = DriverManager.getConnection(url);
             Statement st =con.createStatement();
             st = con.createStatement();
-            String s = "SELECT password FROM users WHERE code='"+lbluserpass.getText()+"'";
+            String s = "SELECT password FROM users WHERE code='"+firstWord+"'";
             rs = st.executeQuery(s);
           
 while(rs.next())
@@ -312,8 +330,17 @@ while(rs.next())
         }
         if(combopermission.getSelectedItem().equals(lblhashold.getText())){
         //تغییر پسورد
+         //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
+        String firstWord = lbluserpass.getText();
+     if(firstWord.contains(" ")){
+        firstWord= firstWord.substring(0, firstWord.indexOf(" ")); 
+//       jLabel1.setText(firstWord);
+//       jTextField1.setText(firstWord);
+     }
+     //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
+       
         String _hash = lblhash.getText();
-        String sql = "update users set password='%s' where code='"+lbluserpass.getText()+"'";
+        String sql = "update users set password='%s' where code='"+firstWord+"'";
         sql = String.format(sql, _hash);
         Clas.class_register obj = new Clas.class_register();
         obj.NonQuery(sql);

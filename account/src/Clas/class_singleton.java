@@ -10,9 +10,8 @@ import accounts.GroupsAccess;
 import accounts.Users;
 import accounts.Shift;
 import accounts.Positions;
-import accounts.Positions_1;
 import accounts.Shift_Type;
-import accounts.ChangePassword;
+
 
 
 
@@ -27,8 +26,7 @@ public static JInternalFrame jifusers;
 public static JInternalFrame jifShift;
 public static JInternalFrame jifShift_Type;
 public static JInternalFrame jifPositions;
-public static JInternalFrame jifPositions_1;
-public static JInternalFrame jifchangepassword;
+
     
 
     
@@ -80,24 +78,8 @@ public static JInternalFrame jifchangepassword;
         return jifPositions ;
         
             }
-    
-    public static synchronized  JInternalFrame Positions_1(){
-        if(jifPositions_1 == null){
-        jifPositions_1 = new Positions_1();
-        jifPositions_1.toFront();
-        }
-        return jifPositions_1 ;
-        
-            }
    
-     public static synchronized  JInternalFrame ChangePassword(){
-        if(jifchangepassword == null){
-        jifchangepassword = new ChangePassword();
-        jifchangepassword.toFront();
-        }
-        return jifchangepassword ;
-        
-            }
+     
 
     
 }
