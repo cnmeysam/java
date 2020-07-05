@@ -51,6 +51,8 @@ public class frmmain extends javax.swing.JFrame {
         lblusers = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         lblshift = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        lblchangepass = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -177,6 +179,22 @@ public class frmmain extends javax.swing.JFrame {
             }
         });
         jXTaskPane.getContentPane().add(lblshift);
+        jXTaskPane.getContentPane().add(jSeparator5);
+
+        lblchangepass.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        lblchangepass.setText("Change password");
+        lblchangepass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblchangepassMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblchangepassMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblchangepassMouseExited(evt);
+            }
+        });
+        jXTaskPane.getContentPane().add(lblchangepass);
 
         jXTaskPaneContainer.add(jXTaskPane);
 
@@ -414,6 +432,43 @@ public class frmmain extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowActivated
 
+    private void lblchangepassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblchangepassMouseEntered
+        // TODO add your handling code here:
+        //تغییر فونت لیبل وقتی ماوس میره روش شروع
+        Font font = new Font("cambria",Font.BOLD ,14);
+        lblchangepass.setFont(font);
+        //تغییر فونت لیبل وقتی ماوس میره روش پایان
+    }//GEN-LAST:event_lblchangepassMouseEntered
+
+    private void lblchangepassMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblchangepassMouseExited
+        // TODO add your handling code here:
+        //تغییر فونت لیبل وقتی ماوس میره روش شروع
+        Font font = new Font("cambria",Font.PLAIN ,14);
+        lblchangepass.setFont(font);
+        //تغییر فونت لیبل وقتی ماوس میره روش پایان
+    }//GEN-LAST:event_lblchangepassMouseExited
+
+    private void lblchangepassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblchangepassMouseClicked
+        // TODO add your handling code here:
+        JInternalFrame iframe = Clas.class_singleton.ChangePassword();
+            iframe.toFront();
+      if(!DesktopPane.isAncestorOf(iframe)){
+		DesktopPane.add(iframe);
+        	iframe.setVisible(true);
+               
+                //ماکسیمایز کردن اینترنال فریم
+//                try {
+//            iframe.setMaximum(true);
+//         }
+//         catch(java.beans.PropertyVetoException e) {
+//         }
+                 //ماکسیمایز کردن اینترنال فریم
+	}
+	else{
+		DesktopPane.setSelectedFrame(iframe);
+	     }
+    }//GEN-LAST:event_lblchangepassMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -460,8 +515,10 @@ public class frmmain extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private org.jdesktop.swingx.JXTaskPane jXTaskPane;
     private org.jdesktop.swingx.JXTaskPaneContainer jXTaskPaneContainer;
+    private javax.swing.JLabel lblchangepass;
     private javax.swing.JLabel lblgroupaccess;
     private javax.swing.JLabel lblposition;
     private javax.swing.JLabel lblshift;

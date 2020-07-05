@@ -11,6 +11,7 @@ import accounts.Users;
 import accounts.Shift;
 import accounts.Positions;
 import accounts.Shift_Type;
+import accounts.ChangePassword;
 
 
 
@@ -26,6 +27,7 @@ public static JInternalFrame jifusers;
 public static JInternalFrame jifShift;
 public static JInternalFrame jifShift_Type;
 public static JInternalFrame jifPositions;
+public static JInternalFrame jifChangePassword;
 
     
 
@@ -79,7 +81,14 @@ public static JInternalFrame jifPositions;
         
             }
    
-     
+     public static synchronized  JInternalFrame ChangePassword(){
+        if(jifChangePassword == null){
+        jifChangePassword = new ChangePassword();
+        jifChangePassword.toFront();
+        }
+        return jifChangePassword ;
+        
+            }
 
     
 }
