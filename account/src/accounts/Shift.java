@@ -5,7 +5,6 @@
  */
 package accounts;
 
-
 import java.util.Date;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -37,29 +36,27 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 //کتابخانه مورد نیاز برای ورودی فقط اعداد
+
 /**
  *
  * @author Admin
  */
 public class Shift extends javax.swing.JInternalFrame {
 
-    
     private static Shift jifShift;
-        public static Shift Shift(){
-        if(jifShift == null){
-        jifShift = new Shift();
+
+    public static Shift Shift() {
+        if (jifShift == null) {
+            jifShift = new Shift();
         }
         return jifShift;
-        }
-        
-        
-        //شمارنده تعداد دیتابیس
-    public int NonQuery()
-    {
-       
-    try
-    {
-        
+    }
+
+    //شمارنده تعداد دیتابیس
+    public int NonQuery() {
+
+        try {
+
 //        //راست چین کردن سلولهای جی تیبل
 //        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 //        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -69,68 +66,60 @@ public class Shift extends javax.swing.JInternalFrame {
 //    ((DefaultTableCellRenderer)datatable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.RIGHT);
 //    //راست چین کردن هدر جی تیبل  
 //            
-    
-	
             //کد دی هش
-			FileReader reader = new FileReader("lib\\Miscsied.jar");
+            FileReader reader = new FileReader("lib\\Miscsied.jar");
             BufferedReader bufferedReader = new BufferedReader(reader);
-String strDec ;
-while ((strDec = bufferedReader.readLine()) != null){
-     byte[] dectryptArray = strDec.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok; 
-        try {
-            ok = new String(decarray,"UTF-8");
-			String url; 
-            url=ok;
+            String strDec;
+            while ((strDec = bufferedReader.readLine()) != null) {
+                byte[] dectryptArray = strDec.getBytes();
+                byte[] decarray = Base64.decodeBase64(dectryptArray);
+                String ok;
+                try {
+                    ok = new String(decarray, "UTF-8");
+                    String url;
+                    url = ok;
 //کد دی هش
-            
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection con = DriverManager.getConnection(url);
-            Statement st =con.createStatement();
-            
-            
-          ResultSet resultSet = st.executeQuery("select count(*) from shift");
 
- while (resultSet.next()) {
- //return resultSet.getInt(1);
- lblall.setText(String.valueOf(resultSet.getInt(1)));
- }
- 
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    Connection con = DriverManager.getConnection(url);
+                    Statement st = con.createStatement();
+
+                    ResultSet resultSet = st.executeQuery("select count(*) from shift");
+
+                    while (resultSet.next()) {
+                        //return resultSet.getInt(1);
+                        lblall.setText(String.valueOf(resultSet.getInt(1)));
+                    }
+
               //تغییر سایز سلولها
-                
                     TableColumn column1 = null;
                     column1 = datatable.getColumnModel().getColumn(0);
                     column1.setMaxWidth(60);
-            //تغییر سایز سلولها
-            datatable.getColumnModel().getColumn(00).setHeaderValue("ID");
-            datatable.getColumnModel().getColumn(01).setHeaderValue("User");
-            
-            datatable.getColumnModel().getColumn(02).setHeaderValue("Shift Time");
-            datatable.getColumnModel().getColumn(03).setHeaderValue("Shift Type");
-            datatable.getColumnModel().getColumn(04).setHeaderValue("Start Date");
-            datatable.getColumnModel().getColumn(05).setHeaderValue("End Date");
-            
-            
-            
- 
+                    //تغییر سایز سلولها
+                    datatable.getColumnModel().getColumn(00).setHeaderValue("ID");
+                    datatable.getColumnModel().getColumn(01).setHeaderValue("User");
 
- }//کد دی هش
-		catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Shift.class.getName()).log(Level.SEVERE, null, ex);
-        }
-		}
+                    datatable.getColumnModel().getColumn(02).setHeaderValue("Shift Time");
+                    datatable.getColumnModel().getColumn(03).setHeaderValue("Shift Type");
+                    datatable.getColumnModel().getColumn(04).setHeaderValue("Start Date");
+                    datatable.getColumnModel().getColumn(05).setHeaderValue("End Date");
+
+                }//کد دی هش
+                catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Shift.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 //کد دی هش
-      
-    }catch (Exception ex)
-        {
+
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-       return 0;
-        
-    
-}
+        return 0;
+
+    }
+
     //شمارنده تعداد دیتابیس
+
     /**
      * Creates new form Shift
      */
@@ -143,21 +132,20 @@ while ((strDec = bufferedReader.readLine()) != null){
         lblcombo.setVisible(false);
         compersenell();
         comboshift();
-        
+
         StDate.setVisible(false);
         lblstart.setVisible(false);
         EnDate.setVisible(false);
         lblend.setVisible(false);
     }
-    
+
     //صفحه بندی
-    
     private void Refresh_Table() {
         //limit 1
         //String test = "SELECT COUNT(*) FROM users ";
         //String sql = "select * from users limit 1",5"
         //عدد اول شروع ایندکس عدد دوم سطرهایی که میخوام
-        String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`id` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` limit 0,10";
+        String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`code` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` limit 0,10";
         Clas.classtable obj = new Clas.classtable();
         DefaultTableModel dtm = obj.Query(sql);
         datatable.setModel(dtm);
@@ -175,13 +163,13 @@ while ((strDec = bufferedReader.readLine()) != null){
             if (Clas.classpaging.query_to_db("SELECT COUNT(*) AS rowcount FROM shift")) {
                 try {
                     ResultSet res_temp = Clas.classpaging.getResultSet();
-                     if (res_temp.next()){
-                    double m = res_temp.getInt("rowcount");
-                    res_temp.close();
-                    m = m / 10;
-                    lblall.setText(String.valueOf(Math.ceil(m)));
-                    NonQuery();
-                     }
+                    if (res_temp.next()) {
+                        double m = res_temp.getInt("rowcount");
+                        res_temp.close();
+                        m = m / 10;
+                        lblall.setText(String.valueOf(Math.ceil(m)));
+                        NonQuery();
+                    }
                 } catch (Exception ex) {
                     Logger.getLogger(this.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -190,41 +178,42 @@ while ((strDec = bufferedReader.readLine()) != null){
         }
 
     }
-    
+
     private void last() {
         btnnext.setEnabled(false);
         btnprevious.setEnabled(true);
-        
-         String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`id` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id`  ORDER BY ID DESC limit 10  ";
+
+        String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`code` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id`  ORDER BY ID DESC limit 10  ";
         Clas.classtable obj = new Clas.classtable();
         DefaultTableModel dtm = obj.Query(sql);
         datatable.setModel(dtm);
         lblpage.setText(String.valueOf(0));
-        
+
         int index = Integer.parseInt(lblall.getText());
-        index = index/10;
+        index = index / 10;
         lblpage.setText(String.valueOf(index));
-        lblStart.setText(String.valueOf(index*10));
+        lblStart.setText(String.valueOf(index * 10));
         NonQuery();
     }
+
     //صفحه بندی
     //خالی کردن
+
     private void empty() {
-        
-        
+
         combopersenell.setSelectedIndex(0);
         comboshift.setSelectedIndex(0);
         txttime.setText("");
         StartDate.setDate(null);
         EndDate.setDate(null);
-        
+
         //combomoneytype.setSelectedItem(null);
         last();
         paging_Table();
         NonQuery();
         compersenell();
         comboshift();
-        combopersenell.setRequestFocusEnabled(true );
+        combopersenell.setRequestFocusEnabled(true);
         combopersenell.requestFocus();
     }
     //خالی کردن
@@ -232,99 +221,95 @@ while ((strDec = bufferedReader.readLine()) != null){
 //combo comboProduct
     Connection con;
     Statement st;
-    ResultSet rs; 
+    ResultSet rs;
+
     private void compersenell() {
         combopersenell.removeAllItems();
-            
-         try
-    {
-            //کد دی هش
-			FileReader reader = new FileReader("lib\\Miscsied.jar");
-            BufferedReader bufferedReader = new BufferedReader(reader);
-String strDec ;
-while ((strDec = bufferedReader.readLine()) != null){
-     byte[] dectryptArray = strDec.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok; 
+
         try {
-            ok = new String(decarray,"UTF-8");
-			String url; 
-            url=ok;
+            //کد دی هش
+            FileReader reader = new FileReader("lib\\Miscsied.jar");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String strDec;
+            while ((strDec = bufferedReader.readLine()) != null) {
+                byte[] dectryptArray = strDec.getBytes();
+                byte[] decarray = Base64.decodeBase64(dectryptArray);
+                String ok;
+                try {
+                    ok = new String(decarray, "UTF-8");
+                    String url;
+                    url = ok;
 //کد دی هش
-            
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection con = DriverManager.getConnection(url);
-            Statement st =con.createStatement();
-            st = con.createStatement();
-            String s = "SELECT CONCAT (code,\" \", fname,\" \",lname )FROM `users` WHERE   active='1'";
-            rs = st.executeQuery(s);
-          
-while(rs.next())
-                {
-                    //1=id and 2=username and 3=password
-                    combopersenell.addItem(rs.getString(1));
-                    
-                }    
- }//کد دی هش
-		catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Shift.class.getName()).log(Level.SEVERE, null, ex);
-        }
-		}
+
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    Connection con = DriverManager.getConnection(url);
+                    Statement st = con.createStatement();
+                    st = con.createStatement();
+                    String s = "SELECT CONCAT (code,\" \", fname,\" \",lname )FROM `users` WHERE `active`=1 AND (`enddate` >=(SELECT CURDATE() as mydate ) OR (`enddate` = \"\" OR `enddate` IS null) OR `endtime`=0)";
+                    rs = st.executeQuery(s);
+
+                    while (rs.next()) {
+                        //1=id and 2=username and 3=password
+                        combopersenell.addItem(rs.getString(1));
+
+                    }
+                }//کد دی هش
+                catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Shift.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 //کد دی هش
-        
-    }catch (Exception ex)
-        {
+
+        } catch (Exception ex) {
             Logger.getLogger(this.getName()).log(Level.SEVERE, null, ex);
         }
     }
 //combo combopersenell
-    
+
     //combo comboProduct
     Connection con1;
     Statement st1;
-    ResultSet rs1; 
+    ResultSet rs1;
+
     private void comboshift() {
         comboshift.removeAllItems();
-            
-         try
-    {
-            //کد دی هش
-			FileReader reader = new FileReader("lib\\Miscsied.jar");
-            BufferedReader bufferedReader = new BufferedReader(reader);
-String strDec ;
-while ((strDec = bufferedReader.readLine()) != null){
-     byte[] dectryptArray = strDec.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok; 
+
         try {
-            ok = new String(decarray,"UTF-8");
-			String url; 
-            url=ok;
+            //کد دی هش
+            FileReader reader = new FileReader("lib\\Miscsied.jar");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String strDec;
+            while ((strDec = bufferedReader.readLine()) != null) {
+                byte[] dectryptArray = strDec.getBytes();
+                byte[] decarray = Base64.decodeBase64(dectryptArray);
+                String ok;
+                try {
+                    ok = new String(decarray, "UTF-8");
+                    String url;
+                    url = ok;
 //کد دی هش
-            
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection con1 = DriverManager.getConnection(url);
-            Statement st1 =con1.createStatement();
-            st1 = con1.createStatement();
-            
-            String s = "SELECT CONCAT (id,\" \", shifttypes ,\" \",coefficient ) FROM `shifttype`";
-            rs1 = st1.executeQuery(s);
-          
-while(rs1.next())
-                {
-                    //1=id and 2=username and 3=password
-                    comboshift.addItem(rs1.getString(1));
-                    
-                }    
- }//کد دی هش
-		catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Shift.class.getName()).log(Level.SEVERE, null, ex);
-        }
-		}
+
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    Connection con1 = DriverManager.getConnection(url);
+                    Statement st1 = con1.createStatement();
+                    st1 = con1.createStatement();
+
+                    String s = "SELECT CONCAT (id,\" \", shifttypes ,\" \",coefficient ) FROM `shifttype`";
+                    rs1 = st1.executeQuery(s);
+
+                    while (rs1.next()) {
+                        //1=id and 2=username and 3=password
+                        comboshift.addItem(rs1.getString(1));
+
+                    }
+                }//کد دی هش
+                catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Shift.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 //کد دی هش
-        
-    }catch (Exception ex)
-        {
+
+        } catch (Exception ex) {
             Logger.getLogger(this.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -346,8 +331,8 @@ while(rs1.next())
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        comboshift = new javax.swing.JComboBox<>();
-        combopersenell = new javax.swing.JComboBox<>();
+        comboshift = new javax.swing.JComboBox<String>();
+        combopersenell = new javax.swing.JComboBox<String>();
         StartDate = new com.toedter.calendar.JDateChooser();
         EndDate = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
@@ -378,7 +363,7 @@ while(rs1.next())
         lblsearch = new javax.swing.JLabel();
         btnsearch = new javax.swing.JButton();
         txtsearch = new javax.swing.JTextField();
-        comboSearch = new javax.swing.JComboBox<>();
+        comboSearch = new javax.swing.JComboBox<String>();
         StDate = new com.toedter.calendar.JDateChooser();
         EnDate = new com.toedter.calendar.JDateChooser();
         lblend = new javax.swing.JLabel();
@@ -440,6 +425,11 @@ while(rs1.next())
         jLabel8.setText("Shift Type:");
 
         comboshift.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        comboshift.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboshiftActionPerformed(evt);
+            }
+        });
 
         combopersenell.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
 
@@ -749,7 +739,7 @@ while(rs1.next())
         txtsearch.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
 
         comboSearch.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        comboSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Personell", "Shift Type", "Start Date", "End Date", "Start End", "BETWEEN" }));
+        comboSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Personell", "Shift Type", "Start Date", "End Date", "Start End", "BETWEEN" }));
         comboSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboSearchActionPerformed(evt);
@@ -896,350 +886,321 @@ while(rs1.next())
     }// </editor-fold>//GEN-END:initComponents
 
     private void notdelete() {
-	
-	//شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
-        String firstWord = (String)_lblIDS;
-     if(firstWord.contains(" ")){
-        firstWord= firstWord.substring(0, firstWord.indexOf(" ")); 
+
+        //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
+        String firstWord = (String) _lblIDS;
+        if (firstWord.contains(" ")) {
+            firstWord = firstWord.substring(0, firstWord.indexOf(" "));
 //       jLabel1.setText(firstWord);
 //       jTextField1.setText(firstWord);
-     }
+        }
      //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
-     
-        String _ProLine = firstWord; 
-	
+
+        String _ProLine = firstWord;
+
         //هش پسورد 
         try {
-            
-             FileReader reader = new FileReader("lib\\Miscsied.jar");
-    BufferedReader bufferedReader = new BufferedReader(reader);
-    String line;
-    while ((line = bufferedReader.readLine()) != null) {
-        byte[] dectryptArray = line.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok;
-        System.out.println(decarray);
-        ok = new String(decarray,"UTF-8");
-	String url; 
-        url=ok;
+
+            FileReader reader = new FileReader("lib\\Miscsied.jar");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                byte[] dectryptArray = line.getBytes();
+                byte[] decarray = Base64.decodeBase64(dectryptArray);
+                String ok;
+                System.out.println(decarray);
+                ok = new String(decarray, "UTF-8");
+                String url;
+                url = ok;
 //reader.close();
-            
-            //String url =line;
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection(url);
+
+                //String url =line;
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(url);
 
 //جلوگیری از تکرار
-Statement stmt = con.createStatement();
-int rowcount = -1;
-ResultSet result = stmt.executeQuery( "select count(id) from users WHERE (id='"+_ProLine+"') and active='0' ");
+                Statement stmt = con.createStatement();
+                int rowcount = -1;
+                ResultSet result = stmt.executeQuery("select count(id) from users WHERE (id='" + _ProLine + "') and active='0' ");
 //select count(ID) from users WHERE (code='9' OR username='9') and ID NOT IN (34)
-result.next();
-rowcount = result.getInt(1);
-def=rowcount;
+                result.next();
+                rowcount = result.getInt(1);
+                def = rowcount;
 //stmt.close();
-con.close();
-if(rowcount>=1)
-{
-    JOptionPane.showMessageDialog(null, "users Is Deactivated");
-    
-    
-    System.out.println("def= "+def);
-    
-}
-else{
-    def=0;
-}
-    }
-        }catch (Exception ex) {
-        System.out.println("Found some error : "+ex);
-        }
-        finally {
-        // close all the connections.
+                con.close();
+                if (rowcount >= 1) {
+                    JOptionPane.showMessageDialog(null, "users Is Deactivated");
+
+                    System.out.println("def= " + def);
+
+                } else {
+                    def = 0;
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("Found some error : " + ex);
+        } finally {
+            // close all the connections.
 
         }
     }
-    
+
     public void delete() {
-        if(datatable.getSelectedRow()==-1)
-        {
+        if (datatable.getSelectedRow() == -1) {
             lbl_error.setText("Pleas Select a Row!");
         }
-         notdelete();
- if(def==0){
-            System.out.println("def= "+def);
-        int i = datatable.getSelectedRow();
-        String  id = datatable.getValueAt(i, 0).toString();
-        Clas.class_register obj = new Clas.class_register();
-        String sql = "delete from shift where ID='%s'";
-        sql = String.format(sql, id);
-        obj.NonQuery(sql);
-        if(Clas.class_register.check ==1){
-             lbl_error.setForeground(Color.RED);
-        lbl_error.setText(combopersenell.getSelectedItem()+ " (This Record Reference Is In Use In Another Form!)");
-         }
-         else{
-        lbl_error.setForeground(Color.RED);
-        lbl_error.setText(combopersenell.getSelectedItem()+ "  removed!");
-         }
-        
-        
-        last();
-        paging_Table();
-        NonQuery();
-        empty();
-        combopersenell.setRequestFocusEnabled(true );
-        combopersenell.requestFocus();
+        notdelete();
+        if (def == 0) {
+            System.out.println("def= " + def);
+            int i = datatable.getSelectedRow();
+            String id = datatable.getValueAt(i, 0).toString();
+            Clas.class_register obj = new Clas.class_register();
+            String sql = "delete from shift where ID='%s'";
+            sql = String.format(sql, id);
+            obj.NonQuery(sql);
+            if (Clas.class_register.check == 1) {
+                lbl_error.setForeground(Color.RED);
+                lbl_error.setText(combopersenell.getSelectedItem() + " (This Record Reference Is In Use In Another Form!)");
+            } else {
+                lbl_error.setForeground(Color.RED);
+                lbl_error.setText(combopersenell.getSelectedItem() + "  removed!");
+            }
+
+            last();
+            paging_Table();
+            NonQuery();
+            empty();
+            combopersenell.setRequestFocusEnabled(true);
+            combopersenell.requestFocus();
         }
-        def=0;
-        System.out.println("def= "+def);
+        def = 0;
+        System.out.println("def= " + def);
     }
-    
-    
+
     public void save() {
-    if(txttime.getText().equals("")){
-                JOptionPane.showMessageDialog(null,
-                "Shift Time can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-            }
-    else if(combopersenell.getSelectedItem().equals("")){
-                JOptionPane.showMessageDialog(null,
-                "Personell can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-            }
-     else if(comboshift.getSelectedItem().equals("")){
-                JOptionPane.showMessageDialog(null,
-                "Shift Type can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-            }
-            else{
-        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd");
-        String dt1 = formatter1.format(StartDate.getDate());
-        String dt2 = formatter1.format(EndDate.getDate());   
-        if(dt2.compareTo(dt1) >= 0){
-//شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
-        String firstWord = (String)combopersenell.getSelectedItem();
-     if(firstWord.contains(" ")){
-        firstWord= firstWord.substring(0, firstWord.indexOf(" ")); 
-//       jLabel1.setText(firstWord);
-//       jTextField1.setText(firstWord);
-     }
-     //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
-     
-        String _combopersenell = firstWord; 
-        lblcombo.setText(_combopersenell);
-        String _time = txttime.getText();
-        
-        
-        String  _StartDate="";
-        if (StartDate.getDate()!=null)
-        {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");        
-         _StartDate = formatter.format(StartDate.getDate());
-        }
-         
-       String _EndDate= "";
-        if (EndDate.getDate()!=null)
-        {
-//            SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd");
-              _EndDate = formatter1.format(EndDate.getDate());
-        }
-        
-        //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
-        String firstWord2 = (String)comboshift.getSelectedItem();
-     if(firstWord2.contains(" ")){
-        firstWord2= firstWord2.substring(0, firstWord2.indexOf(" ")); 
-//       jLabel1.setText(firstWord);
-//       jTextField1.setText(firstWord);
-     }
-     //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
-        String _shift = firstWord2;
-                
-        String sql = "insert into shift (userref ,shifttime,startdate,enddate,shifttyperef) VALUES((SELECT ID FROM `users` WHERE code='"+_combopersenell+"'),'"+_time+"','"+_StartDate+"','"+_EndDate+"',(SELECT ID FROM `shifttype` WHERE id='"+_shift+"'))";
-               
-        
-        //sql = String.format(sql,_combopersenell,_time,_StartDate,_EndDate,_shift);
-        Clas.class_register obj = new Clas.class_register();
-        obj.NonQuery(sql);
-        lbl_error.setForeground(Color.green);
-        lbl_error.setText((String)combopersenell.getSelectedItem()+ "  Inserted!");
-        
-        last();
-        paging_Table();
-        NonQuery();
-        empty();
-        combopersenell.setRequestFocusEnabled(true );
-        combopersenell.requestFocus();
-        
-}
-        else{
+        if (txttime.getText().equals("")) {
             JOptionPane.showMessageDialog(null,
-                "Start Date can't bigger than End Date",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-        }
-    }
-    }
-    private void notreapitedit() {
-	
-	//شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
-        String firstWord = (String)_lblIDS;
-     if(firstWord.contains(" ")){
-        firstWord= firstWord.substring(0, firstWord.indexOf(" ")); 
+                    "Shift Time can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (combopersenell.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(null,
+                    "Personell can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (comboshift.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(null,
+                    "Shift Type can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd");
+            String dt1 = formatter1.format(StartDate.getDate());
+            String dt2 = formatter1.format(EndDate.getDate());
+            if (dt2.compareTo(dt1) >= 0) {
+//شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
+                String firstWord = (String) combopersenell.getSelectedItem();
+                if (firstWord.contains(" ")) {
+                    firstWord = firstWord.substring(0, firstWord.indexOf(" "));
 //       jLabel1.setText(firstWord);
 //       jTextField1.setText(firstWord);
-     }
+                }
      //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
-     
-         _lblIDS = firstWord; 
-	
+
+                String _combopersenell = firstWord;
+                lblcombo.setText(_combopersenell);
+                String _time = txttime.getText();
+
+                String _StartDate = "";
+                if (StartDate.getDate() != null) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+                    _StartDate = formatter.format(StartDate.getDate());
+                }
+
+                String _EndDate = "";
+                if (EndDate.getDate() != null) {
+//            SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd");
+                    _EndDate = formatter1.format(EndDate.getDate());
+                }
+
+                //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
+                String firstWord2 = (String) comboshift.getSelectedItem();
+                if (firstWord2.contains(" ")) {
+                    firstWord2 = firstWord2.substring(0, firstWord2.indexOf(" "));
+//       jLabel1.setText(firstWord);
+//       jTextField1.setText(firstWord);
+                }
+                //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
+                String _shift = firstWord2;
+
+                String sql = "insert into shift (userref ,shifttime,startdate,enddate,shifttyperef) VALUES((SELECT code FROM `users` WHERE code='" + _combopersenell + "'),'" + _time + "','" + _StartDate + "','" + _EndDate + "',(SELECT ID FROM `shifttype` WHERE id='" + _shift + "'))";
+
+                //sql = String.format(sql,_combopersenell,_time,_StartDate,_EndDate,_shift);
+                Clas.class_register obj = new Clas.class_register();
+                obj.NonQuery(sql);
+                lbl_error.setForeground(Color.green);
+                lbl_error.setText((String) combopersenell.getSelectedItem() + "  Inserted!");
+
+                last();
+                paging_Table();
+                NonQuery();
+                empty();
+                combopersenell.setRequestFocusEnabled(true);
+                combopersenell.requestFocus();
+
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Start Date can't bigger than End Date",
+                        "Warning!",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
+
+    private void notreapitedit() {
+
+        //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
+        String firstWord = (String) _lblIDS;
+        if (firstWord.contains(" ")) {
+            firstWord = firstWord.substring(0, firstWord.indexOf(" "));
+//       jLabel1.setText(firstWord);
+//       jTextField1.setText(firstWord);
+        }
+     //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
+
+        _lblIDS = firstWord;
+
         //هش پسورد 
         try {
-            
-             FileReader reader = new FileReader("lib\\Miscsied.jar");
-    BufferedReader bufferedReader = new BufferedReader(reader);
-    String line;
-    while ((line = bufferedReader.readLine()) != null) {
-        byte[] dectryptArray = line.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok;
-        System.out.println(decarray);
-        ok = new String(decarray,"UTF-8");
-	String url; 
-        url=ok;
+
+            FileReader reader = new FileReader("lib\\Miscsied.jar");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                byte[] dectryptArray = line.getBytes();
+                byte[] decarray = Base64.decodeBase64(dectryptArray);
+                String ok;
+                System.out.println(decarray);
+                ok = new String(decarray, "UTF-8");
+                String url;
+                url = ok;
 //reader.close();
-            
-            //String url =line;
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection(url);
+
+                //String url =line;
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(url);
 
 //جلوگیری از تکرار
-Statement stmt = con.createStatement();
-int rowcount = -1;
-ResultSet result = stmt.executeQuery( "select count(id) from users WHERE (id='"+_lblIDS+"') and   active='1' ");
+                Statement stmt = con.createStatement();
+                int rowcount = -1;
+                ResultSet result = stmt.executeQuery("select count(id) from users WHERE (id='" + _lblIDS + "') and   active='1' ");
 //select count(ID) from users WHERE (code='9' OR username='9') and ID NOT IN (34)
-result.next();
-rowcount = result.getInt(1);
- System.out.println("rowcount= "+rowcount);
+                result.next();
+                rowcount = result.getInt(1);
+                System.out.println("rowcount= " + rowcount);
 //stmt.close();
-con.close();
-def=rowcount;
-if(rowcount<=0)
-{
-    JOptionPane.showMessageDialog(null, "Places Is Deactivated");
-    
-    
-    System.out.println("def= "+def);
-    
-}
+                con.close();
+                def = rowcount;
+                if (rowcount <= 0) {
+                    JOptionPane.showMessageDialog(null, "Places Is Deactivated");
 
-    }
-        }catch (Exception ex) {
-        System.out.println("Found some error : "+ex);
-        }
-        finally {
-        // close all the connections.
+                    System.out.println("def= " + def);
+
+                }
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Found some error : " + ex);
+        } finally {
+            // close all the connections.
 
         }
     }
+
     public void edit() {
-    if(datatable.getSelectedRow()==-1)
-        {
+        if (datatable.getSelectedRow() == -1) {
             lbl_error.setText("Pleas Select a Row!");
-        }
-     else if(txttime.getText().equals("")){
-                JOptionPane.showMessageDialog(null,
-                "Shift Time can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-            }
-     else if(combopersenell.getSelectedItem().equals("")){
-                JOptionPane.showMessageDialog(null,
-                "Personell can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-            }
-     else if(comboshift.getSelectedItem().equals("")){
-                JOptionPane.showMessageDialog(null,
-                "Shift Type can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-            }
-            else{
-     SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd");
-        String dt1 = formatter1.format(StartDate.getDate());
-        String dt2 = formatter1.format(EndDate.getDate());   
-        if(dt2.compareTo(dt1) >= 0){
-        notreapitedit();
-        
-        if(def>0){
-            System.out.println("def= "+def);
-    //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
-        String firstWord = (String)combopersenell.getSelectedItem();
-     if(firstWord.contains(" ")){
-        firstWord= firstWord.substring(0, firstWord.indexOf(" ")); 
-//       jLabel1.setText(firstWord);
-//       jTextField1.setText(firstWord);
-     }
-     //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
-     
-        int i = datatable.getSelectedRow();
-        String  _id = datatable.getValueAt(i, 0).toString();
-        String _combopersenell = firstWord; 
-        
-        String _txttime = txttime.getText();
-        
-        String  _StartDate = "";
-        if (StartDate.getDate()!=null)
-        {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");        
-         _StartDate = formatter.format(StartDate.getDate());
-        }
-         
-       String _EndDate= "";
-        if (EndDate.getDate()!=null)
-        {
-//            SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd");
-              _EndDate = formatter1.format(EndDate.getDate());
-        }
-        //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
-        String firstWord2 = (String)comboshift.getSelectedItem();
-     if(firstWord2.contains(" ")){
-        firstWord2= firstWord2.substring(0, firstWord2.indexOf(" ")); 
-//       jLabel1.setText(firstWord);
-//       jTextField1.setText(firstWord);
-     }
-        String _comboshift = firstWord2;
-        
-                
-        
-        
-        String sql = "update shift SET  userref=(SELECT ID FROM `users` WHERE code='"+_combopersenell+"'),shifttime='"+_txttime+"',startdate='"+_StartDate+"',enddate='"+_EndDate+"',shifttyperef=(SELECT ID FROM `shifttype` WHERE id='"+_comboshift+"') where ID='"+_id+"'";
-        
-        
-        Clas.class_register obj = new Clas.class_register();
-        obj.NonQuery(sql);
-        lbl_error.setForeground(Color.orange);
-        lbl_error.setText(combopersenell.getSelectedItem() + "Edited!");
-        last();
-        paging_Table();
-        empty();
-        combopersenell.setRequestFocusEnabled(true );
-        combopersenell.requestFocus();
-        } 
-        
-        System.out.println("def= "+def);
-        def=0;
-        }
-        else{
+        } else if (txttime.getText().equals("")) {
             JOptionPane.showMessageDialog(null,
-                "Start Date can't bigger than End Date",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
+                    "Shift Time can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (combopersenell.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(null,
+                    "Personell can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (comboshift.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(null,
+                    "Shift Type can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd");
+            String dt1 = formatter1.format(StartDate.getDate());
+            String dt2 = formatter1.format(EndDate.getDate());
+            if (dt2.compareTo(dt1) >= 0) {
+                notreapitedit();
+
+                if (def > 0) {
+                    System.out.println("def= " + def);
+                    //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
+                    String firstWord = (String) combopersenell.getSelectedItem();
+                    if (firstWord.contains(" ")) {
+                        firstWord = firstWord.substring(0, firstWord.indexOf(" "));
+//       jLabel1.setText(firstWord);
+//       jTextField1.setText(firstWord);
+                    }
+     //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
+
+                    int i = datatable.getSelectedRow();
+                    String _id = datatable.getValueAt(i, 0).toString();
+                    String _combopersenell = firstWord;
+
+                    String _txttime = txttime.getText();
+
+                    String _StartDate = "";
+                    if (StartDate.getDate() != null) {
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+                        _StartDate = formatter.format(StartDate.getDate());
+                    }
+
+                    String _EndDate = "";
+                    if (EndDate.getDate() != null) {
+//            SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd");
+                        _EndDate = formatter1.format(EndDate.getDate());
+                    }
+                    //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
+                    String firstWord2 = (String) comboshift.getSelectedItem();
+                    if (firstWord2.contains(" ")) {
+                        firstWord2 = firstWord2.substring(0, firstWord2.indexOf(" "));
+//       jLabel1.setText(firstWord);
+//       jTextField1.setText(firstWord);
+                    }
+                    String _comboshift = firstWord2;
+
+                    String sql = "update shift SET  userref=(SELECT code FROM `users` WHERE code='" + _combopersenell + "'),shifttime='" + _txttime + "',startdate='" + _StartDate + "',enddate='" + _EndDate + "',shifttyperef=(SELECT ID FROM `shifttype` WHERE id='" + _comboshift + "') where ID='" + _id + "'";
+
+                    Clas.class_register obj = new Clas.class_register();
+                    obj.NonQuery(sql);
+                    lbl_error.setForeground(Color.orange);
+                    lbl_error.setText(combopersenell.getSelectedItem() + "Edited!");
+                    last();
+                    paging_Table();
+                    empty();
+                    combopersenell.setRequestFocusEnabled(true);
+                    combopersenell.requestFocus();
+                }
+
+                System.out.println("def= " + def);
+                def = 0;
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Start Date can't bigger than End Date",
+                        "Warning!",
+                        JOptionPane.WARNING_MESSAGE);
+            }
         }
-     }
     }
     private void btnfirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfirstActionPerformed
         // TODO add your handling code here:
@@ -1255,16 +1216,15 @@ if(rowcount<=0)
         if (n <= 0) {
             btnprevious.setEnabled(false);
             JOptionPane.showMessageDialog(null,
-                "You Are in First Page",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
+                    "You Are in First Page",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
             btnnext.setEnabled(true);
-        }
-        else{
+        } else {
             btnnext.setEnabled(true);
             int index = Integer.parseInt(lblStart.getText());
             index = index - 10;
-            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`id` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id`  limit " + index + ",10";
+            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`code` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id`  limit " + index + ",10";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             if (dtm.getRowCount() > 0) {
@@ -1285,21 +1245,20 @@ if(rowcount<=0)
         String a = lblpage.getText();
         String b = lblall.getText();
 
-        if (Integer.parseInt(a) >= Integer.parseInt(b)/10) {
+        if (Integer.parseInt(a) >= Integer.parseInt(b) / 10) {
             btnnext.setEnabled(false);
             JOptionPane.showMessageDialog(null,
-                "You Are in Last Page",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
+                    "You Are in Last Page",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
             btnprevious.setEnabled(true);
-        }
-        else{
+        } else {
             btnprevious.setEnabled(true);
             //btnbefor.setEnabled(true);
             //lblrows.setVisible(true);
             int index = Integer.parseInt(lblStart.getText());
             index = index + 10;
-            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`id` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id`  limit " + index + ",10";
+            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`code` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id`  limit " + index + ",10";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             if (dtm.getRowCount() > 0) {
@@ -1323,63 +1282,62 @@ if(rowcount<=0)
     private void datatableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datatableMouseClicked
         // TODO add your handling code here:
         int i = datatable.getSelectedRow();
-        _lblIDS=(datatable.getValueAt(i, 1).toString());
-       notreapitedit();
-       if(def==1){
-        combopersenell.setSelectedItem(datatable.getValueAt(i, 1).toString());
-        txttime.setText(datatable.getValueAt(i, 2).toString());
+        _lblIDS = (datatable.getValueAt(i, 1).toString());
+        notreapitedit();
+        if (def == 1) {
+            combopersenell.setSelectedItem(datatable.getValueAt(i, 1).toString());
+            txttime.setText(datatable.getValueAt(i, 2).toString());
         //datestart.setDate((java.util.Date) datatable.getValueAt(i, 3));
-        //DefaultTableModel model =(DefaultTableModel)datatable.getModel();
-        comboshift.setSelectedItem(datatable.getValueAt(i, 3).toString());
-        Date date1;
-        try {
-            String da1 = datatable.getValueAt(i, 4).toString();
-            if(!da1.equals("")){
-                //System.out.println(da1 + " null2");
-                date1 = new SimpleDateFormat("yyyy/MM/dd").parse((String)da1);
+            //DefaultTableModel model =(DefaultTableModel)datatable.getModel();
+            comboshift.setSelectedItem(datatable.getValueAt(i, 3).toString());
+            Date date1;
+            try {
+                String da1 = datatable.getValueAt(i, 4).toString();
+                if (!da1.equals("")) {
+                    //System.out.println(da1 + " null2");
+                    date1 = new SimpleDateFormat("yyyy/MM/dd").parse((String) da1);
 //            date = new SimpleDateFormat("yyyy/MM/dd").parse((String)model.getValueAt(i,10));
 
-        StartDate.setDate(date1);
+                    StartDate.setDate(date1);
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (ParseException ex) {
-            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Date date2;
-        try {
-            String da2 = datatable.getValueAt(i, 5).toString();
-            if(!da2.equals("")){
+            Date date2;
+            try {
+                String da2 = datatable.getValueAt(i, 5).toString();
+                if (!da2.equals("")) {
                 //System.out.println(da2 + " null3");
-                
-                date2 = new SimpleDateFormat("yyyy/MM/dd").parse((String)da2);
+
+                    date2 = new SimpleDateFormat("yyyy/MM/dd").parse((String) da2);
 //            date = new SimpleDateFormat("yyyy/MM/dd").parse((String)model.getValueAt(i,10));
 
-                EndDate.setDate(date2);
+                    EndDate.setDate(date2);
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (ParseException ex) {
-            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-        
-        }
-       
-        System.out.println("def= "+def);
-        def=0;
-        
-        
-        
+
+        System.out.println("def= " + def);
+        def = 0;
+
+
     }//GEN-LAST:event_datatableMouseClicked
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         // TODO add your handling code here:
-        int safe = JOptionPane.showConfirmDialog(null, "Are You Sure?!!","Closing Form!",   JOptionPane.YES_NO_CANCEL_OPTION);
+        int safe = JOptionPane.showConfirmDialog(null, "Are You Sure?!!", "Closing Form!", JOptionPane.YES_NO_CANCEL_OPTION);
 
-        if(safe == JOptionPane.YES_OPTION){
+        if (safe == JOptionPane.YES_OPTION) {
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);//yes
 
         } else if (safe == JOptionPane.CANCEL_OPTION) {
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//cancel
         } else {
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//no
-}
+        }
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
@@ -1388,7 +1346,7 @@ if(rowcount<=0)
         NonQuery();
         compersenell();
         comboshift();
-        combopersenell.setRequestFocusEnabled(true );
+        combopersenell.setRequestFocusEnabled(true);
         combopersenell.requestFocus();
     }//GEN-LAST:event_formInternalFrameOpened
 
@@ -1396,6 +1354,7 @@ if(rowcount<=0)
         // TODO add your handling code here:
         compersenell();
         comboshift();
+        
         last();
         NonQuery();
     }//GEN-LAST:event_formInternalFrameActivated
@@ -1456,45 +1415,44 @@ if(rowcount<=0)
 
     private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchActionPerformed
         // TODO add your handling code here:
-        
 
-        if((String)comboSearch.getSelectedItem()=="Personell"){
-            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`id` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` WHERE CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) LIKE '%"+txtsearch.getText()+"%'  ";
+        if ((String) comboSearch.getSelectedItem() == "Personell") {
+            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`code` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` WHERE CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) LIKE '%" + txtsearch.getText() + "%'  ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
         }
-        if((String)comboSearch.getSelectedItem()=="Shift Type"){
-            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`id` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` WHERE CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) LIKE '%"+txtsearch.getText()+"%'  ";
+        if ((String) comboSearch.getSelectedItem() == "Shift Type") {
+            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`code` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` WHERE CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) LIKE '%" + txtsearch.getText() + "%'  ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
         }
 
-        if((String)comboSearch.getSelectedItem()=="Start Date"){
+        if ((String) comboSearch.getSelectedItem() == "Start Date") {
 
-            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`id` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` WHERE startdate ='"+StDate.getDate()+"'  ";
+            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`code` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` WHERE startdate ='" + StDate.getDate() + "'  ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
         }
-        if((String)comboSearch.getSelectedItem()=="End Date"){
+        if ((String) comboSearch.getSelectedItem() == "End Date") {
 
-            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`id` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` `enddate` ='"+EnDate.getDate()+"'  ";
+            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`code` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` `enddate` ='" + EnDate.getDate() + "'  ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
         }
-        if((String)comboSearch.getSelectedItem()=="Start End"){
+        if ((String) comboSearch.getSelectedItem() == "Start End") {
 
-            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`id` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` WHERE startdate ='"+StDate.getDate()+"' and `enddate` ='"+EnDate.getDate()+"'  ";
+            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`code` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` WHERE startdate ='" + StDate.getDate() + "' and `enddate` ='" + EnDate.getDate() + "'  ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
         }
-        if((String)comboSearch.getSelectedItem()=="SBETWEEN"){
+        if ((String) comboSearch.getSelectedItem() == "SBETWEEN") {
 
-            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`id` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` WHERE startdate BETWEEN '"+StDate.getDate()+"' and '"+EnDate.getDate()+"'   ";
+            String sql = "SELECT shift.id AS 'ID', CONCAT ( users.`code` ,\" \", users.`fname` ,\" \", users.`lname`) AS 'users',shift.`shifttime` AS 'shifttime', CONCAT ( shifttype.`id` ,\" \", shifttype.`shifttypes` ,\" \", shifttype.`coefficient`) AS 'shift type', shift.`startdate` AS 'start date', shift.`enddate` AS 'end date' FROM `shift` shift INNER JOIN `users` users ON users.`code` = shift.`userref` INNER JOIN `shifttype` shifttype ON shift.`shifttyperef` = shifttype.`id` WHERE startdate BETWEEN '" + StDate.getDate() + "' and '" + EnDate.getDate() + "'   ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
@@ -1504,8 +1462,7 @@ if(rowcount<=0)
 
     private void comboSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSearchActionPerformed
         // TODO add your handling code here:
-        if((String)comboSearch.getSelectedItem()=="Personell")
-        {
+        if ((String) comboSearch.getSelectedItem() == "Personell") {
             txtsearch.setVisible(true);
             lblsearch.setVisible(true);
             EnDate.setVisible(false);
@@ -1513,8 +1470,7 @@ if(rowcount<=0)
             StDate.setVisible(false);
             lblend.setVisible(false);
         }
-        if((String)comboSearch.getSelectedItem()=="Shift Type")
-        {
+        if ((String) comboSearch.getSelectedItem() == "Shift Type") {
             txtsearch.setVisible(true);
             lblsearch.setVisible(true);
             EnDate.setVisible(false);
@@ -1522,10 +1478,8 @@ if(rowcount<=0)
             StDate.setVisible(false);
             lblend.setVisible(false);
         }
-        
 
-        if((String)comboSearch.getSelectedItem()=="Start Date")
-        {
+        if ((String) comboSearch.getSelectedItem() == "Start Date") {
             txtsearch.setVisible(false);
             lblsearch.setVisible(false);
             EnDate.setVisible(true);
@@ -1533,8 +1487,7 @@ if(rowcount<=0)
             StDate.setVisible(false);
             lblend.setVisible(false);
         }
-        if((String)comboSearch.getSelectedItem()=="End Date")
-        {
+        if ((String) comboSearch.getSelectedItem() == "End Date") {
             txtsearch.setVisible(false);
             lblsearch.setVisible(false);
             StDate.setVisible(false);
@@ -1543,8 +1496,7 @@ if(rowcount<=0)
             EnDate.setVisible(true);
             lblend.setVisible(true);
         }
-        if((String)comboSearch.getSelectedItem()=="Start End")
-        {
+        if ((String) comboSearch.getSelectedItem() == "Start End") {
             txtsearch.setVisible(false);
             lblsearch.setVisible(false);
             EnDate.setVisible(true);
@@ -1552,16 +1504,19 @@ if(rowcount<=0)
             StDate.setVisible(true);
             lblend.setVisible(true);
         }
-        if((String)comboSearch.getSelectedItem()=="BETWEEN")
-        {
+        if ((String) comboSearch.getSelectedItem() == "BETWEEN") {
             txtsearch.setVisible(false);
             lblsearch.setVisible(false);
             EnDate.setVisible(true);
             lblstart.setVisible(true);
-            StDate.setVisible(true);   
+            StDate.setVisible(true);
             lblend.setVisible(true);
         }
     }//GEN-LAST:event_comboSearchActionPerformed
+
+    private void comboshiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboshiftActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboshiftActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1621,7 +1576,7 @@ if(rowcount<=0)
     private javax.swing.JTextField txttime;
     // End of variables declaration//GEN-END:variables
 
-int def = 0;
-String _lblIDS="0";
+    int def = 0;
+    String _lblIDS = "0";
 
 }

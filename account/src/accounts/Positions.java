@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package accounts;
+
 import static Clas.class_singleton.Positions;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -26,104 +27,94 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 //کتابخانه مورد نیاز برای ورودی فقط اعداد
+
 /**
  *
  * @author Admin
  */
 public class Positions extends javax.swing.JInternalFrame {
 
-    
-        private static Positions jifPositions;
-        public static Positions Positions(){
-        if(jifPositions == null){
-        jifPositions = new Positions();
+    private static Positions jifPositions;
+
+    public static Positions Positions() {
+        if (jifPositions == null) {
+            jifPositions = new Positions();
         }
         return jifPositions;
-        }
-        
-        //شمارنده تعداد دیتابیس
-    public int NonQuery()
-    {
-       
-    try
-    {
-        
-        //راست چین کردن سلولهای جی تیبل
-        //DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-       //rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
-         //راست چین کردن سلولهای جی تیبل
-         
-     //راست چین کردن هدر جی تیبل  
-    //((DefaultTableCellRenderer)datatable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.RIGHT);
-    //راست چین کردن هدر جی تیبل  
-            
-    
-	
-            //کد دی هش
-			FileReader reader = new FileReader("lib\\Miscsied.jar");
-            BufferedReader bufferedReader = new BufferedReader(reader);
-String strDec ;
-while ((strDec = bufferedReader.readLine()) != null){
-     byte[] dectryptArray = strDec.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok; 
-        try {
-            ok = new String(decarray,"UTF-8");
-			String url; 
-            url=ok;
-//کد دی هش
-            
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection con = DriverManager.getConnection(url);
-            Statement st =con.createStatement();
-            
-            
-          ResultSet resultSet = st.executeQuery("select count(*) from position");
+    }
 
- while (resultSet.next()) {
- //return resultSet.getInt(1);
- lblall.setText(String.valueOf(resultSet.getInt(1)));
- }
- 
+    //شمارنده تعداد دیتابیس
+    public int NonQuery() {
+
+        try {
+
+        //راست چین کردن سلولهای جی تیبل
+            //DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+            //rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+            //راست چین کردن سلولهای جی تیبل
+     //راست چین کردن هدر جی تیبل  
+            //((DefaultTableCellRenderer)datatable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.RIGHT);
+            //راست چین کردن هدر جی تیبل  
+            //کد دی هش
+            FileReader reader = new FileReader("lib\\Miscsied.jar");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String strDec;
+            while ((strDec = bufferedReader.readLine()) != null) {
+                byte[] dectryptArray = strDec.getBytes();
+                byte[] decarray = Base64.decodeBase64(dectryptArray);
+                String ok;
+                try {
+                    ok = new String(decarray, "UTF-8");
+                    String url;
+                    url = ok;
+//کد دی هش
+
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    Connection con = DriverManager.getConnection(url);
+                    Statement st = con.createStatement();
+
+                    ResultSet resultSet = st.executeQuery("select count(*) from position");
+
+                    while (resultSet.next()) {
+                        //return resultSet.getInt(1);
+                        lblall.setText(String.valueOf(resultSet.getInt(1)));
+                    }
+
               //تغییر سایز سلولها
-                
                     TableColumn column1 = null;
                     column1 = datatable.getColumnModel().getColumn(0);
                     column1.setMaxWidth(60);
-            //تغییر سایز سلولها
-            datatable.getColumnModel().getColumn(00).setHeaderValue("ID");
-            datatable.getColumnModel().getColumn(01).setHeaderValue("positin Title");
-            datatable.getColumnModel().getColumn(02).setHeaderValue("position Type");
+                    //تغییر سایز سلولها
+                    datatable.getColumnModel().getColumn(00).setHeaderValue("ID");
+                    datatable.getColumnModel().getColumn(01).setHeaderValue("positin Title");
+                    datatable.getColumnModel().getColumn(02).setHeaderValue("position Type");
 
-            
- 
-
- }//کد دی هش
-		catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Positions.class.getName()).log(Level.SEVERE, null, ex);
-        }
-		}
+                }//کد دی هش
+                catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Positions.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 //کد دی هش
-      
-    }catch (Exception ex)
-        {
+
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-       return 0;
-        
-    
-}
+        return 0;
+
+    }
+
     //شمارنده تعداد دیتابیس
+
     /**
      * Creates new form Positions
      */
     public Positions() {
-        
+
         initComponents();
         LblID.setVisible(false);
     }
 
-        //صفحه بندی
+    //صفحه بندی
     private void Refresh_Table() {
         //limit 1
         //String test = "SELECT COUNT(*) FROM users ";
@@ -141,19 +132,19 @@ while ((strDec = bufferedReader.readLine()) != null){
         NonQuery();
 
     }
-    
+
     private void paging_Table() {
         if (Clas.classpaging.connect_to_db()) {
             if (Clas.classpaging.query_to_db("SELECT COUNT(*) AS rowcount FROM position")) {
                 try {
                     ResultSet res_temp = Clas.classpaging.getResultSet();
-                     if (res_temp.next()){
-                    double m = res_temp.getInt("rowcount");
-                    res_temp.close();
-                    m = m / 10;
-                    lblall.setText(String.valueOf(Math.ceil(m)));
-                    NonQuery();
-                     }
+                    if (res_temp.next()) {
+                        double m = res_temp.getInt("rowcount");
+                        res_temp.close();
+                        m = m / 10;
+                        lblall.setText(String.valueOf(Math.ceil(m)));
+                        NonQuery();
+                    }
                 } catch (Exception ex) {
                     Logger.getLogger(this.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -162,41 +153,43 @@ while ((strDec = bufferedReader.readLine()) != null){
         }
 
     }
-    
+
     private void last() {
         btnnext.setEnabled(false);
         btnprevious.setEnabled(true);
-        
-         String sql = "select Id,positintitle,positiontype FROM position  ORDER BY ID DESC limit 10  ";
+
+        String sql = "select Id,positintitle,positiontype FROM position  ORDER BY ID DESC limit 10  ";
         Clas.classtable obj = new Clas.classtable();
         DefaultTableModel dtm = obj.Query(sql);
         datatable.setModel(dtm);
         lblpage.setText(String.valueOf(0));
-        
+
         int index = Integer.parseInt(lblall.getText());
-        index = index/10;
+        index = index / 10;
         lblpage.setText(String.valueOf(index));
-        lblStart.setText(String.valueOf(index*10));
+        lblStart.setText(String.valueOf(index * 10));
         NonQuery();
     }
+
     //صفحه بندی
     //خالی کردن
+
     private void empty() {
-        
-        
+
         //comboCostCenters.setSelectedIndex(0);
         txtPositionTitle.setText("");
 //        RadioActive.setSelected(false);  
 //        RadioDeactive.setSelected(false);
-        
-        
+
         last();
         paging_Table();
         NonQuery();
-        txtPositionTitle.setRequestFocusEnabled(true );
+        txtPositionTitle.setRequestFocusEnabled(true);
         txtPositionTitle.requestFocus();
     }
+
     //خالی کردن
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -693,327 +686,302 @@ while ((strDec = bufferedReader.readLine()) != null){
 
     private void datatableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datatableMouseClicked
         // TODO add your handling code here:
-        int i = datatable.getSelectedRow(); 
+        int i = datatable.getSelectedRow();
         LblID.setText(datatable.getValueAt(i, 0).toString());
         txtPositionTitle.setText(datatable.getValueAt(i, 1).toString());
-         _active=(datatable.getValueAt(i, 2).toString());
-         
-         if(_active.equals("1")){
+        _active = (datatable.getValueAt(i, 2).toString());
+
+        if (_active.equals("1")) {
             //RadioActive.setSelected(isSelected);
             RadioActive.setSelected(true);
         }
-        if(_active.equals("0")){
+        if (_active.equals("0")) {
             RadioActive.setSelected(false);
         }
-        
-         
-         if(_active.equals("0")){
+
+        if (_active.equals("0")) {
             //RadioDeactive.setSelected(isSelected);
             RadioDeactive.setSelected(true);
         }
-        if(_active.equals("1")){
+        if (_active.equals("1")) {
             RadioDeactive.setSelected(false);
         }
 
     }//GEN-LAST:event_datatableMouseClicked
 
-    
     public void delete() {
-        if(datatable.getSelectedRow()==-1)
-        {
+        if (datatable.getSelectedRow() == -1) {
             lbl_error.setText("Pleas Select a Row!");
         }
         int i = datatable.getSelectedRow();
-        String  id = datatable.getValueAt(i, 0).toString();
+        String id = datatable.getValueAt(i, 0).toString();
         Clas.class_register obj = new Clas.class_register();
         String sql = "delete from position where ID='%s'";
         sql = String.format(sql, id);
         obj.NonQuery(sql);
-        if(Clas.class_register.check ==1){
-             lbl_error.setForeground(Color.RED);
-        lbl_error.setText(txtPositionTitle.getText()+ " (This Record Reference Is In Use In Another Form!)");
-         }
-         else{
-        lbl_error.setForeground(Color.RED);
-        lbl_error.setText(txtPositionTitle.getText()+ "  removed!");
-         }
-        
+        if (Clas.class_register.check == 1) {
+            lbl_error.setForeground(Color.RED);
+            lbl_error.setText(txtPositionTitle.getText() + " (This Record Reference Is In Use In Another Form!)");
+        } else {
+            lbl_error.setForeground(Color.RED);
+            lbl_error.setText(txtPositionTitle.getText() + "  removed!");
+        }
+
         last();
         paging_Table();
         NonQuery();
         empty();
-        txtPositionTitle.setRequestFocusEnabled(true );
+        txtPositionTitle.setRequestFocusEnabled(true);
         txtPositionTitle.requestFocus();
-        
+
     }
-    
+
     public void save() {
-    
-        if(txtPositionTitle.getText().equals("")){
-        JOptionPane.showMessageDialog(null,
-                "Position Title can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-        }else{
-        
-        String _txtPositionTitle = txtPositionTitle.getText();
-        
-        if (RadioActive.isSelected()){
-      _active="1"; 
-   }else{
-      _active="0"; 
-   }
-        
-        if (RadioDeactive.isSelected()){
-     _active="0"; 
-   }else{
-      _active="1"; 
-   }
-        Connection connection = null;
-        
-        //هش پسورد 
-        try {
-            
-             FileReader reader = new FileReader("lib\\Miscsied.jar");
-    BufferedReader bufferedReader = new BufferedReader(reader);
-    String line;
-    while ((line = bufferedReader.readLine()) != null) {
-        byte[] dectryptArray = line.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok;
-        System.out.println(decarray);
-        ok = new String(decarray,"UTF-8");
-	String url; 
-        url=ok;
-            
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection(url);
-            
+
+        if (txtPositionTitle.getText().equals("")) {
+            JOptionPane.showMessageDialog(null,
+                    "Position Title can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            String _txtPositionTitle = txtPositionTitle.getText();
+
+            if (RadioActive.isSelected()) {
+                _active = "1";
+            } else {
+                _active = "0";
+            }
+
+            if (RadioDeactive.isSelected()) {
+                _active = "0";
+            } else {
+                _active = "1";
+            }
+            Connection connection = null;
+
+            //هش پسورد 
+            try {
+
+                FileReader reader = new FileReader("lib\\Miscsied.jar");
+                BufferedReader bufferedReader = new BufferedReader(reader);
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    byte[] dectryptArray = line.getBytes();
+                    byte[] decarray = Base64.decodeBase64(dectryptArray);
+                    String ok;
+                    System.out.println(decarray);
+                    ok = new String(decarray, "UTF-8");
+                    String url;
+                    url = ok;
+
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    connection = DriverManager.getConnection(url);
+
             //String url =line;
-Class.forName("com.mysql.jdbc.Driver");
-Connection con = DriverManager.getConnection(url);
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection(url);
 
 //جلوگیری از تکرار
-Statement stmt = con.createStatement();
-int rowcount = -1;
-ResultSet result = stmt.executeQuery( "select count(ID) from position WHERE positintitle='"+txtPositionTitle.getText()+"' ");
-result.next();
-rowcount = result.getInt(1);
-stmt.close();
-con.close();
-if(rowcount>=1)
-{
-    JOptionPane.showMessageDialog(null, "Position Name Is Registered Before");
-}
-            
-else 
-{
-       
-        
-          
-        String sql = "insert into position (positintitle,positiontype)"
-                + "values ('%s','%s')";
-        
-        sql = String.format(sql,_txtPositionTitle,_active );
-        Clas.class_register obj = new Clas.class_register();
-        obj.NonQuery(sql);
-        lbl_error.setForeground(Color.green);
-        lbl_error.setText(txtPositionTitle.getText()+ "  Inserted!");
-        
-        last();
-        paging_Table();
-        NonQuery();
-        empty();
-        txtPositionTitle.setRequestFocusEnabled(true );
-        txtPositionTitle.requestFocus();
- }
-    }
-        }
-        catch (Exception ex) {
-        System.out.println("Found some error : "+ex);
-        }
- finally {
-        // close all the connections.
+                    Statement stmt = con.createStatement();
+                    int rowcount = -1;
+                    ResultSet result = stmt.executeQuery("select count(ID) from position WHERE positintitle='" + txtPositionTitle.getText() + "' ");
+                    result.next();
+                    rowcount = result.getInt(1);
+                    stmt.close();
+                    con.close();
+                    if (rowcount >= 1) {
+                        JOptionPane.showMessageDialog(null, "Position Name Is Registered Before");
+                    } else {
 
+                        String sql = "insert into position (positintitle,positiontype)"
+                                + "values ('%s','%s')";
+
+                        sql = String.format(sql, _txtPositionTitle, _active);
+                        Clas.class_register obj = new Clas.class_register();
+                        obj.NonQuery(sql);
+                        lbl_error.setForeground(Color.green);
+                        lbl_error.setText(txtPositionTitle.getText() + "  Inserted!");
+
+                        last();
+                        paging_Table();
+                        NonQuery();
+                        empty();
+                        txtPositionTitle.setRequestFocusEnabled(true);
+                        txtPositionTitle.requestFocus();
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println("Found some error : " + ex);
+            } finally {
+                // close all the connections.
+
+            }
         }
     }
-    }
-    
+
     private void notreapitedit() {
-	
-	//شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
-        String firstWord = (String)_lblIDS;
-     if(firstWord.contains(" ")){
-        firstWord= firstWord.substring(0, firstWord.indexOf(" ")); 
+
+        //شروع گرفتن اعداد قبل از اسپیس از کومبو باکس
+        String firstWord = (String) _lblIDS;
+        if (firstWord.contains(" ")) {
+            firstWord = firstWord.substring(0, firstWord.indexOf(" "));
 //       jLabel1.setText(firstWord);
 //       jTextField1.setText(firstWord);
-     }
+        }
      //پایان گرفتن اعداد قبل از اسپیس از کومبو باکس   
-     
-         _lblIDS = firstWord; 
-	
+
+        _lblIDS = firstWord;
+
         //هش پسورد 
         try {
-            
-             FileReader reader = new FileReader("lib\\Miscsied.jar");
-    BufferedReader bufferedReader = new BufferedReader(reader);
-    String line;
-    while ((line = bufferedReader.readLine()) != null) {
-        byte[] dectryptArray = line.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok;
-        System.out.println(decarray);
-        ok = new String(decarray,"UTF-8");
-	String url; 
-        url=ok;
+
+            FileReader reader = new FileReader("lib\\Miscsied.jar");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                byte[] dectryptArray = line.getBytes();
+                byte[] decarray = Base64.decodeBase64(dectryptArray);
+                String ok;
+                System.out.println(decarray);
+                ok = new String(decarray, "UTF-8");
+                String url;
+                url = ok;
 //reader.close();
-            
-            //String url =line;
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection(url);
+
+                //String url =line;
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(url);
 
 //جلوگیری از تکرار
-Statement stmt = con.createStatement();
-int rowcount = -1;
-ResultSet result = stmt.executeQuery( "select count(id) from costcenters WHERE (CostCentersName='"+txtPositionTitle.getText()+"') and ID NOT IN ('"+_lblIDS+"') ");
+                Statement stmt = con.createStatement();
+                int rowcount = -1;
+                ResultSet result = stmt.executeQuery("select count(id) from costcenters WHERE (CostCentersName='" + txtPositionTitle.getText() + "') and ID NOT IN ('" + _lblIDS + "') ");
 //select count(ID) from users WHERE (code='9' OR username='9') and ID NOT IN (34)
-result.next();
-rowcount = result.getInt(1);
+                result.next();
+                rowcount = result.getInt(1);
 //stmt.close();
-con.close();
-if(rowcount>=1)
-{
-    JOptionPane.showMessageDialog(null, "Place Is Deactivated");
-    
-    def=1;
-    System.out.println("def= "+def);
-    
-}
-    }
-        }catch (Exception ex) {
-        System.out.println("Found some error : "+ex);
-        }
-        finally {
-        // close all the connections.
+                con.close();
+                if (rowcount >= 1) {
+                    JOptionPane.showMessageDialog(null, "Place Is Deactivated");
+
+                    def = 1;
+                    System.out.println("def= " + def);
+
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("Found some error : " + ex);
+        } finally {
+            // close all the connections.
 
         }
     }
-    
+
     public void edit() {
-        
-        if(datatable.getSelectedRow()==-1)
-        {
+
+        if (datatable.getSelectedRow() == -1) {
             lbl_error.setText("Pleas Select a Row!");
-        }
-        else if(txtPositionTitle.getText().equals("")){
-        JOptionPane.showMessageDialog(null,
-                "Position Title can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-        }else{
-        int i = datatable.getSelectedRow();
-        String  _id = datatable.getValueAt(i, 0).toString();
-        String _txtPositionTitle = txtPositionTitle.getText();
-        
-        if (RadioActive.isSelected()){
-      _active="1"; 
-   }else{
-      _active="0"; 
-   }
-        
-        
-        
-        if (RadioDeactive.isSelected()){
-     _active="0";
-   }else{
-     _active="1";
-   }
-        
-       Connection connection = null;
-        
-        //هش پسورد 
-        try {
-            
-             FileReader reader = new FileReader("lib\\Miscsied.jar");
-    BufferedReader bufferedReader = new BufferedReader(reader);
-    String line;
-    while ((line = bufferedReader.readLine()) != null) {
-        byte[] dectryptArray = line.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok;
-        System.out.println(decarray);
-        ok = new String(decarray,"UTF-8");
-	String url; 
-        url=ok;
-            
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection(url);
-            
+        } else if (txtPositionTitle.getText().equals("")) {
+            JOptionPane.showMessageDialog(null,
+                    "Position Title can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            int i = datatable.getSelectedRow();
+            String _id = datatable.getValueAt(i, 0).toString();
+            String _txtPositionTitle = txtPositionTitle.getText();
+
+            if (RadioActive.isSelected()) {
+                _active = "1";
+            } else {
+                _active = "0";
+            }
+
+            if (RadioDeactive.isSelected()) {
+                _active = "0";
+            } else {
+                _active = "1";
+            }
+
+            Connection connection = null;
+
+            //هش پسورد 
+            try {
+
+                FileReader reader = new FileReader("lib\\Miscsied.jar");
+                BufferedReader bufferedReader = new BufferedReader(reader);
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    byte[] dectryptArray = line.getBytes();
+                    byte[] decarray = Base64.decodeBase64(dectryptArray);
+                    String ok;
+                    System.out.println(decarray);
+                    ok = new String(decarray, "UTF-8");
+                    String url;
+                    url = ok;
+
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    connection = DriverManager.getConnection(url);
+
             //String url =line;
-Class.forName("com.mysql.jdbc.Driver");
-Connection con = DriverManager.getConnection(url);
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection(url);
 
 //جلوگیری از تکرار
-Statement stmt = con.createStatement();
-int rowcount = -1;
-ResultSet result = stmt.executeQuery( "select count(ID) from position WHERE positintitle='"+txtPositionTitle.getText()+"'and id not IN ('"+LblID.getText()+"') ");
-result.next();
-rowcount = result.getInt(1);
-stmt.close();
-con.close();
-if(rowcount>=1)
-{
-    JOptionPane.showMessageDialog(null, "Position Name Is Registered Before");
-}
-            
-else 
-{
-        
-        
-        String sql = "update position set positintitle='%s' ,positiontype='%s' where ID='%s'";
-        sql = String.format(sql,_txtPositionTitle,_active,_id);
-        
-        Clas.class_register obj = new Clas.class_register();
-        obj.NonQuery(sql);
-        lbl_error.setForeground(Color.orange);
-        lbl_error.setText(txtPositionTitle.getText()+ "Edited!");
-        last();
-        paging_Table();
-        empty();
-        txtPositionTitle.setRequestFocusEnabled(true );
-        txtPositionTitle.requestFocus();
-         }
-    }
-        }
-        catch (Exception ex) {
-        System.out.println("Found some error : "+ex);
-        }
- finally {
-        // close all the connections.
+                    Statement stmt = con.createStatement();
+                    int rowcount = -1;
+                    ResultSet result = stmt.executeQuery("select count(ID) from position WHERE positintitle='" + txtPositionTitle.getText() + "'and id not IN ('" + LblID.getText() + "') ");
+                    result.next();
+                    rowcount = result.getInt(1);
+                    stmt.close();
+                    con.close();
+                    if (rowcount >= 1) {
+                        JOptionPane.showMessageDialog(null, "Position Name Is Registered Before");
+                    } else {
 
+                        String sql = "update position set positintitle='%s' ,positiontype='%s' where ID='%s'";
+                        sql = String.format(sql, _txtPositionTitle, _active, _id);
+
+                        Clas.class_register obj = new Clas.class_register();
+                        obj.NonQuery(sql);
+                        lbl_error.setForeground(Color.orange);
+                        lbl_error.setText(txtPositionTitle.getText() + "Edited!");
+                        last();
+                        paging_Table();
+                        empty();
+                        txtPositionTitle.setRequestFocusEnabled(true);
+                        txtPositionTitle.requestFocus();
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println("Found some error : " + ex);
+            } finally {
+                // close all the connections.
+
+            }
         }
-    } 
     }
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         // TODO add your handling code here:
-        int safe = JOptionPane.showConfirmDialog(null, "Are You Sure?!!","Closing Form!",   JOptionPane.YES_NO_CANCEL_OPTION);
+        int safe = JOptionPane.showConfirmDialog(null, "Are You Sure?!!", "Closing Form!", JOptionPane.YES_NO_CANCEL_OPTION);
 
-        if(safe == JOptionPane.YES_OPTION){
+        if (safe == JOptionPane.YES_OPTION) {
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);//yes
 
         } else if (safe == JOptionPane.CANCEL_OPTION) {
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//cancel
         } else {
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//no
-}
+        }
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // TODO add your handling code here:
-        
+
         last();
         NonQuery();
-        txtPositionTitle.setRequestFocusEnabled(true );
+        txtPositionTitle.setRequestFocusEnabled(true);
         txtPositionTitle.requestFocus();
     }//GEN-LAST:event_formInternalFrameOpened
 
@@ -1063,12 +1031,11 @@ else
         if (n <= 0) {
             btnprevious.setEnabled(false);
             JOptionPane.showMessageDialog(null,
-                "You Are in First Page",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
+                    "You Are in First Page",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
             btnnext.setEnabled(true);
-        }
-        else{
+        } else {
             btnnext.setEnabled(true);
             int index = Integer.parseInt(lblStart.getText());
             index = index - 10;
@@ -1093,15 +1060,14 @@ else
         String a = lblpage.getText();
         String b = lblall.getText();
 
-        if (Integer.parseInt(a) >= Integer.parseInt(b)/10) {
+        if (Integer.parseInt(a) >= Integer.parseInt(b) / 10) {
             btnnext.setEnabled(false);
             JOptionPane.showMessageDialog(null,
-                "You Are in Last Page",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
+                    "You Are in Last Page",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
             btnprevious.setEnabled(true);
-        }
-        else{
+        } else {
             btnprevious.setEnabled(true);
             //btnbefor.setEnabled(true);
             //lblrows.setVisible(true);
@@ -1155,20 +1121,20 @@ else
 
     private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchActionPerformed
         // TODO add your handling code here:
-        if(radioallsearch.isSelected()){
-            String sql = "select Id,positintitle,positiontype FROM position WHERE positintitle  LIKE '%"+txtsearch.getText()+"%'  ";
+        if (radioallsearch.isSelected()) {
+            String sql = "select Id,positintitle,positiontype FROM position WHERE positintitle  LIKE '%" + txtsearch.getText() + "%'  ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
         }
-        if(radioactivesearch.isSelected()){
-            String sql = "select Id,positintitle,positiontype FROM position WHERE positintitle  LIKE '%"+txtsearch.getText()+"%'  ";
+        if (radioactivesearch.isSelected()) {
+            String sql = "select Id,positintitle,positiontype FROM position WHERE positintitle  LIKE '%" + txtsearch.getText() + "%'  ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
         }
-        if(radioInactivesearch.isSelected()){
-            String sql = "select Id,positintitle,positiontype FROM position WHERE positintitle  LIKE '%"+txtsearch.getText()+"%'  ";
+        if (radioInactivesearch.isSelected()) {
+            String sql = "select Id,positintitle,positiontype FROM position WHERE positintitle  LIKE '%" + txtsearch.getText() + "%'  ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
@@ -1226,6 +1192,6 @@ else
     private javax.swing.JTextField txtsearch;
     // End of variables declaration//GEN-END:variables
 String _active = null;
-String _lblIDS="";
-int def = 0;
+    String _lblIDS = "";
+    int def = 0;
 }

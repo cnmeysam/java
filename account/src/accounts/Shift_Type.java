@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package accounts;
+
 import Clas.class_register;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -26,6 +27,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 //کتابخانه مورد نیاز برای ورودی فقط اعداد
+
 /**
  *
  * @author Admin
@@ -33,87 +35,75 @@ import javax.swing.text.DocumentFilter;
 public class Shift_Type extends javax.swing.JInternalFrame {
 
     private static Shift_Type jifShift_Type;
-        public static Shift_Type Shift_Type(){
-        if(jifShift_Type == null){
-        jifShift_Type = new Shift_Type();
+
+    public static Shift_Type Shift_Type() {
+        if (jifShift_Type == null) {
+            jifShift_Type = new Shift_Type();
         }
         return jifShift_Type;
-        }
-    
-        //شمارنده تعداد دیتابیس
-    public int NonQuery()
-    {
-       
-    try
-    {
-        
+    }
+
+    //شمارنده تعداد دیتابیس
+    public int NonQuery() {
+
+        try {
+
         //راست چین کردن سلولهای جی تیبل
 //        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 //        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
-         //راست چین کردن سلولهای جی تیبل
-         
+            //راست چین کردن سلولهای جی تیبل
      //راست چین کردن هدر جی تیبل  
 //    ((DefaultTableCellRenderer)datatable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.RIGHT);
-    //راست چین کردن هدر جی تیبل  
-            
-    
-	
+            //راست چین کردن هدر جی تیبل  
             //کد دی هش
-			FileReader reader = new FileReader("lib\\Miscsied.jar");
+            FileReader reader = new FileReader("lib\\Miscsied.jar");
             BufferedReader bufferedReader = new BufferedReader(reader);
-String strDec ;
-while ((strDec = bufferedReader.readLine()) != null){
-     byte[] dectryptArray = strDec.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok; 
-        try {
-            ok = new String(decarray,"UTF-8");
-			String url; 
-            url=ok;
+            String strDec;
+            while ((strDec = bufferedReader.readLine()) != null) {
+                byte[] dectryptArray = strDec.getBytes();
+                byte[] decarray = Base64.decodeBase64(dectryptArray);
+                String ok;
+                try {
+                    ok = new String(decarray, "UTF-8");
+                    String url;
+                    url = ok;
 //کد دی هش
-            
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection con = DriverManager.getConnection(url);
-            Statement st =con.createStatement();
-            
-            
-          ResultSet resultSet = st.executeQuery("select count(*) from shifttype");
 
- while (resultSet.next()) {
- //return resultSet.getInt(1);
- lblall.setText(String.valueOf(resultSet.getInt(1)));
- }
- 
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    Connection con = DriverManager.getConnection(url);
+                    Statement st = con.createStatement();
+
+                    ResultSet resultSet = st.executeQuery("select count(*) from shifttype");
+
+                    while (resultSet.next()) {
+                        //return resultSet.getInt(1);
+                        lblall.setText(String.valueOf(resultSet.getInt(1)));
+                    }
+
               //تغییر سایز سلولها
-                
                     TableColumn column1 = null;
                     column1 = datatable.getColumnModel().getColumn(0);
                     column1.setMaxWidth(60);
-            //تغییر سایز سلولها
-            datatable.getColumnModel().getColumn(0).setHeaderValue("ID");
-            datatable.getColumnModel().getColumn(1).setHeaderValue("shift types ");
-            datatable.getColumnModel().getColumn(2).setHeaderValue("coefficient");
-            
- 
+                    //تغییر سایز سلولها
+                    datatable.getColumnModel().getColumn(0).setHeaderValue("ID");
+                    datatable.getColumnModel().getColumn(1).setHeaderValue("shift types ");
+                    datatable.getColumnModel().getColumn(2).setHeaderValue("coefficient");
 
- }//کد دی هش
-		catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Shift_Type.class.getName()).log(Level.SEVERE, null, ex);
-        }
-		}
+                }//کد دی هش
+                catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Shift_Type.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 //کد دی هش
-      
-    }catch (Exception ex)
-        {
+
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-       return 0;
-        
-    
-}
+        return 0;
+
+    }
     //شمارنده تعداد دیتابیس
-      
-        
+
     /**
      * Creates new form NewJInternalFrame
      */
@@ -125,12 +115,11 @@ while ((strDec = bufferedReader.readLine()) != null){
         initComponents();
         last();
 //        NonQuery();
-        txtShiftTitle.setRequestFocusEnabled(true );
+        txtShiftTitle.setRequestFocusEnabled(true);
         txtShiftTitle.requestFocus();
     }
 
     //صفحه بندی
-    
     private void Refresh_Table() {
         //limit 1
         //String test = "SELECT COUNT(*) FROM users ";
@@ -146,7 +135,7 @@ while ((strDec = bufferedReader.readLine()) != null){
         lblpage.setText("0");
         paging_Table();
         NonQuery();
-        
+
     }
 
     private void paging_Table() {
@@ -154,13 +143,13 @@ while ((strDec = bufferedReader.readLine()) != null){
             if (Clas.classpaging.query_to_db("SELECT COUNT(*) AS rowcount FROM shifttype")) {
                 try {
                     ResultSet res_temp = Clas.classpaging.getResultSet();
-                     if (res_temp.next()){
-                    double m = res_temp.getInt("rowcount");
-                    res_temp.close();
-                    m = m / 10;
-                    lblall.setText(String.valueOf(Math.ceil(m)));
-                    NonQuery();
-                     }
+                    if (res_temp.next()) {
+                        double m = res_temp.getInt("rowcount");
+                        res_temp.close();
+                        m = m / 10;
+                        lblall.setText(String.valueOf(Math.ceil(m)));
+                        NonQuery();
+                    }
                 } catch (Exception ex) {
                     Logger.getLogger(this.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -169,43 +158,42 @@ while ((strDec = bufferedReader.readLine()) != null){
         }
 
     }
-    
+
     private void last() {
         btnnext.setEnabled(false);
         btnprevious.setEnabled(true);
-        
-         String sql = "select id as 'ID', shifttypes  AS 'shift types',coefficient AS 'coefficient'  FROM shifttype ORDER BY ID DESC limit 10  ";
+
+        String sql = "select id as 'ID', shifttypes  AS 'shift types',coefficient AS 'coefficient'  FROM shifttype ORDER BY ID DESC limit 10  ";
         Clas.classtable obj = new Clas.classtable();
         DefaultTableModel dtm = obj.Query(sql);
         datatable.setModel(dtm);
         lblpage.setText(String.valueOf(0));
-        
+
         int index = Integer.parseInt(lblall.getText());
-        index = index/10;
+        index = index / 10;
         lblpage.setText(String.valueOf(index));
-        lblStart.setText(String.valueOf(index*10));
+        lblStart.setText(String.valueOf(index * 10));
         NonQuery();
     }
+
     //صفحه بندی
     //خالی کردن
+
     private void empty() {
-        
-        
+
         //combopersenell.setSelectedIndex(0);
-        
         txtShiftTitle.setText("");
         txtZarib.setText("");
-        
-        
+
         //combomoneytype.setSelectedItem(null);
         last();
         paging_Table();
         NonQuery();
-        txtShiftTitle.setRequestFocusEnabled(true );
+        txtShiftTitle.setRequestFocusEnabled(true);
         txtShiftTitle.requestFocus();
     }
     //خالی کردن
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -670,7 +658,6 @@ while ((strDec = bufferedReader.readLine()) != null){
     private void datatableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datatableMouseClicked
         // TODO add your handling code here:
         int i = datatable.getSelectedRow();
-        
 
         txtShiftTitle.setText(datatable.getValueAt(i, 1).toString());
         txtZarib.setText(datatable.getValueAt(i, 2).toString());
@@ -691,12 +678,11 @@ while ((strDec = bufferedReader.readLine()) != null){
         if (n <= 0) {
             btnprevious.setEnabled(false);
             JOptionPane.showMessageDialog(null,
-                "You Are in First Page",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
+                    "You Are in First Page",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
             btnnext.setEnabled(true);
-        }
-        else{
+        } else {
             btnnext.setEnabled(true);
             int index = Integer.parseInt(lblStart.getText());
             index = index - 10;
@@ -721,15 +707,14 @@ while ((strDec = bufferedReader.readLine()) != null){
         String a = lblpage.getText();
         String b = lblall.getText();
 
-        if (Integer.parseInt(a) >= Integer.parseInt(b)/10) {
+        if (Integer.parseInt(a) >= Integer.parseInt(b) / 10) {
             btnnext.setEnabled(false);
             JOptionPane.showMessageDialog(null,
-                "You Are in Last Page",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
+                    "You Are in Last Page",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
             btnprevious.setEnabled(true);
-        }
-        else{
+        } else {
             btnprevious.setEnabled(true);
             //btnbefor.setEnabled(true);
             //lblrows.setVisible(true);
@@ -743,7 +728,6 @@ while ((strDec = bufferedReader.readLine()) != null){
                 lblpage.setText(String.valueOf(index / 10));
                 datatable.setModel(dtm);
 
-                
                 empty();
                 paging_Table();
                 NonQuery();
@@ -759,236 +743,205 @@ while ((strDec = bufferedReader.readLine()) != null){
     }//GEN-LAST:event_btnlastActionPerformed
 
     public void delete() {
-        
-        if(datatable.getSelectedRow()==-1)
-        {
+
+        if (datatable.getSelectedRow() == -1) {
             lbl_error.setText("Pleas Select a Row!");
-            
+
+        } else {
+
+            int i = datatable.getSelectedRow();
+            String id = datatable.getValueAt(i, 0).toString();
+            Clas.class_register obj = new Clas.class_register();
+            String sql = "delete from shifttype where ID='%s'";
+            sql = String.format(sql, id);
+            obj.NonQuery(sql);
+
+            if (Clas.class_register.check == 1) {
+                lbl_error.setForeground(Color.RED);
+                lbl_error.setText(txtShiftTitle.getText() + " (This Record Reference Is In Use In Another Form!)");
+            } else {
+                lbl_error.setForeground(Color.RED);
+                lbl_error.setText(txtShiftTitle.getText() + "  removed!");
+            }
+
+            last();
+            paging_Table();
+            NonQuery();
+            empty();
+            txtShiftTitle.setRequestFocusEnabled(true);
+            txtShiftTitle.requestFocus();
+
         }
-        
-         
-        else{
-        
-        int i = datatable.getSelectedRow();
-        String  id = datatable.getValueAt(i, 0).toString();
-        Clas.class_register obj = new Clas.class_register();
-        String sql = "delete from shifttype where ID='%s'";
-        sql = String.format(sql, id);
-        obj.NonQuery(sql);
-        
-        if(Clas.class_register.check ==1){
-             lbl_error.setForeground(Color.RED);
-        lbl_error.setText(txtShiftTitle.getText()+ " (This Record Reference Is In Use In Another Form!)");
-         }
-         else{
-        lbl_error.setForeground(Color.RED);
-        lbl_error.setText(txtShiftTitle.getText()+ "  removed!");
-         }
-        
-        
-        
-        last();
-        paging_Table();
-        NonQuery();
-        empty();
-        txtShiftTitle.setRequestFocusEnabled(true );
-        txtShiftTitle.requestFocus();
-        
-        }
-        
+
     }
-    
+
     public void save() {
-    
-        if(txtShiftTitle.getText().equals("")){
-                JOptionPane.showMessageDialog(null,
-                "Shift Title Name can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-            }
-         else if(txtZarib.getText().equals("")){
+
+        if (txtShiftTitle.getText().equals("")) {
             JOptionPane.showMessageDialog(null,
-                "Coefficient can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE); 
-         }
-            else{
+                    "Shift Title Name can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (txtZarib.getText().equals("")) {
+            JOptionPane.showMessageDialog(null,
+                    "Coefficient can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
 
+            String _txtShiftTitle = txtShiftTitle.getText();
+            String _txtZarib = txtZarib.getText();
+            Connection connection = null;
 
-        
-        String _txtShiftTitle = txtShiftTitle.getText();
-        String _txtZarib = txtZarib.getText();
-        Connection connection = null;
-        
-        //هش پسورد 
-        try {
-            
-             FileReader reader = new FileReader("lib\\Miscsied.jar");
-    BufferedReader bufferedReader = new BufferedReader(reader);
-    String line;
-    while ((line = bufferedReader.readLine()) != null) {
-        byte[] dectryptArray = line.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok;
-        System.out.println(decarray);
-        ok = new String(decarray,"UTF-8");
-	String url; 
-        url=ok;
-            
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection(url);
-            
+            //هش پسورد 
+            try {
+
+                FileReader reader = new FileReader("lib\\Miscsied.jar");
+                BufferedReader bufferedReader = new BufferedReader(reader);
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    byte[] dectryptArray = line.getBytes();
+                    byte[] decarray = Base64.decodeBase64(dectryptArray);
+                    String ok;
+                    System.out.println(decarray);
+                    ok = new String(decarray, "UTF-8");
+                    String url;
+                    url = ok;
+
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    connection = DriverManager.getConnection(url);
+
             //String url =line;
-Class.forName("com.mysql.jdbc.Driver");
-Connection con = DriverManager.getConnection(url);
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection(url);
 
 //جلوگیری از تکرار
-Statement stmt = con.createStatement();
-int rowcount = -1;
-ResultSet result = stmt.executeQuery( "select count(ID) from shifttype WHERE shifttypes='"+txtShiftTitle.getText()+"' ");
-result.next();
-rowcount = result.getInt(1);
-stmt.close();
-con.close();
-if(rowcount>=1)
-{
-    JOptionPane.showMessageDialog(null, "Shift Name Is Registered Before");
-}
-            
-else 
-{
-                
-        String sql = "insert into shifttype (shifttypes,coefficient)"
-                + "values ('%s','%s')";
-        
-        sql = String.format(sql,_txtShiftTitle,_txtZarib);
-        Clas.class_register obj = new Clas.class_register();
-        obj.NonQuery(sql);
-        lbl_error.setForeground(Color.green);
-        lbl_error.setText(txtShiftTitle.getText()+ "  Inserted!");
-        
-        last();
-        paging_Table();
-        NonQuery();
-        empty();
-        txtShiftTitle.setRequestFocusEnabled(true );
-        txtShiftTitle.requestFocus();
-        }
-    }
-        }
-        catch (Exception ex) {
-        System.out.println("Found some error : "+ex);
-        }
- finally {
-        // close all the connections.
+                    Statement stmt = con.createStatement();
+                    int rowcount = -1;
+                    ResultSet result = stmt.executeQuery("select count(ID) from shifttype WHERE shifttypes='" + txtShiftTitle.getText() + "' ");
+                    result.next();
+                    rowcount = result.getInt(1);
+                    stmt.close();
+                    con.close();
+                    if (rowcount >= 1) {
+                        JOptionPane.showMessageDialog(null, "Shift Name Is Registered Before");
+                    } else {
 
-        }
+                        String sql = "insert into shifttype (shifttypes,coefficient)"
+                                + "values ('%s','%s')";
+
+                        sql = String.format(sql, _txtShiftTitle, _txtZarib);
+                        Clas.class_register obj = new Clas.class_register();
+                        obj.NonQuery(sql);
+                        lbl_error.setForeground(Color.green);
+                        lbl_error.setText(txtShiftTitle.getText() + "  Inserted!");
+
+                        last();
+                        paging_Table();
+                        NonQuery();
+                        empty();
+                        txtShiftTitle.setRequestFocusEnabled(true);
+                        txtShiftTitle.requestFocus();
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println("Found some error : " + ex);
+            } finally {
+                // close all the connections.
+
+            }
         }
     }
-    
+
     public void edit() {
-        if(datatable.getSelectedRow()==-1)
-        {
+        if (datatable.getSelectedRow() == -1) {
             lbl_error.setText("Pleas Select a Row!");
-        }
-        else if(txtShiftTitle.getText().equals("")){
-                JOptionPane.showMessageDialog(null,
-                "Shift Title Name can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE);
-            }
-         else if(txtZarib.getText().equals("")){
+        } else if (txtShiftTitle.getText().equals("")) {
             JOptionPane.showMessageDialog(null,
-                "Coefficient can't be empty",
-                "Warning!",
-                JOptionPane.WARNING_MESSAGE); 
-         }
-            else{
-        int i = datatable.getSelectedRow();
-        String  _id = datatable.getValueAt(i, 0).toString();
-        String _txtShiftTitle = txtShiftTitle.getText();
-        String _txtZarib = txtZarib.getText();
-        
-        Connection connection = null;
-        
-        //هش پسورد 
-        try {
-            
-             FileReader reader = new FileReader("lib\\Miscsied.jar");
-    BufferedReader bufferedReader = new BufferedReader(reader);
-    String line;
-    while ((line = bufferedReader.readLine()) != null) {
-        byte[] dectryptArray = line.getBytes();
-     byte[] decarray = Base64.decodeBase64(dectryptArray);
-     String ok;
-        System.out.println(decarray);
-        ok = new String(decarray,"UTF-8");
-	String url; 
-        url=ok;
-            
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection(url);
-            
+                    "Shift Title Name can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (txtZarib.getText().equals("")) {
+            JOptionPane.showMessageDialog(null,
+                    "Coefficient can't be empty",
+                    "Warning!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            int i = datatable.getSelectedRow();
+            String _id = datatable.getValueAt(i, 0).toString();
+            String _txtShiftTitle = txtShiftTitle.getText();
+            String _txtZarib = txtZarib.getText();
+
+            Connection connection = null;
+
+            //هش پسورد 
+            try {
+
+                FileReader reader = new FileReader("lib\\Miscsied.jar");
+                BufferedReader bufferedReader = new BufferedReader(reader);
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    byte[] dectryptArray = line.getBytes();
+                    byte[] decarray = Base64.decodeBase64(dectryptArray);
+                    String ok;
+                    System.out.println(decarray);
+                    ok = new String(decarray, "UTF-8");
+                    String url;
+                    url = ok;
+
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    connection = DriverManager.getConnection(url);
+
             //String url =line;
-Class.forName("com.mysql.jdbc.Driver");
-Connection con = DriverManager.getConnection(url);
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection(url);
 
 //جلوگیری از تکرار
-Statement stmt = con.createStatement();
-int rowcount = -1;
-ResultSet result = stmt.executeQuery( "select count(ID) from shifttype WHERE shifttypes='"+txtShiftTitle.getText()+"'and id not IN ('"+_id+"') ");
-result.next();
-rowcount = result.getInt(1);
-stmt.close();
-con.close();
-if(rowcount>=1)
-{
-    JOptionPane.showMessageDialog(null, "Shift Name Is Registered Before");
-}
-            
-else 
-{
-                
-        
-        
-        String sql = "update shifttype set shifttypes='%s' ,coefficient='%s' where ID='%s'";
-        sql = String.format(sql,_txtShiftTitle,_txtZarib ,_id);
-        
-        Clas.class_register obj = new Clas.class_register();
-        obj.NonQuery(sql);
-        lbl_error.setForeground(Color.orange);
-        lbl_error.setText(txtShiftTitle.getText()+ "Edited!");
-        last();
-        paging_Table();
-        empty();
-        txtShiftTitle.setRequestFocusEnabled(true );
-        txtShiftTitle.requestFocus();
-        }
-    }
-        }
-        catch (Exception ex) {
-        System.out.println("Found some error : "+ex);
-        }
- finally {
-        // close all the connections.
+                    Statement stmt = con.createStatement();
+                    int rowcount = -1;
+                    ResultSet result = stmt.executeQuery("select count(ID) from shifttype WHERE shifttypes='" + txtShiftTitle.getText() + "'and id not IN ('" + _id + "') ");
+                    result.next();
+                    rowcount = result.getInt(1);
+                    stmt.close();
+                    con.close();
+                    if (rowcount >= 1) {
+                        JOptionPane.showMessageDialog(null, "Shift Name Is Registered Before");
+                    } else {
 
+                        String sql = "update shifttype set shifttypes='%s' ,coefficient='%s' where ID='%s'";
+                        sql = String.format(sql, _txtShiftTitle, _txtZarib, _id);
+
+                        Clas.class_register obj = new Clas.class_register();
+                        obj.NonQuery(sql);
+                        lbl_error.setForeground(Color.orange);
+                        lbl_error.setText(txtShiftTitle.getText() + "Edited!");
+                        last();
+                        paging_Table();
+                        empty();
+                        txtShiftTitle.setRequestFocusEnabled(true);
+                        txtShiftTitle.requestFocus();
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println("Found some error : " + ex);
+            } finally {
+                // close all the connections.
+
+            }
         }
     }
-    }
-    
+
     private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchActionPerformed
         // TODO add your handling code here:
-         if((String)combosearch.getSelectedItem()=="Shift Type")
-        {
-            String sql = "select id as 'ID', shifttypes  AS 'shift types',coefficient AS 'coefficient'  FROM shifttype WHERE shifttypes LIKE '%"+txtsearch.getText()+"%'  ";
+        if ((String) combosearch.getSelectedItem() == "Shift Type") {
+            String sql = "select id as 'ID', shifttypes  AS 'shift types',coefficient AS 'coefficient'  FROM shifttype WHERE shifttypes LIKE '%" + txtsearch.getText() + "%'  ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
         }
 
-        if((String)combosearch.getSelectedItem()=="Coefficient")
-        {
-            String sql = "select id as 'ID', shifttypes  AS 'shift types',coefficient AS 'coefficient'  FROM shifttype WHERE coefficient LIKE '%"+txtsearch.getText()+"%'  ";
+        if ((String) combosearch.getSelectedItem() == "Coefficient") {
+            String sql = "select id as 'ID', shifttypes  AS 'shift types',coefficient AS 'coefficient'  FROM shifttype WHERE coefficient LIKE '%" + txtsearch.getText() + "%'  ";
             Clas.classtable obj = new Clas.classtable();
             DefaultTableModel dtm = obj.Query(sql);
             datatable.setModel(dtm);
@@ -998,27 +951,27 @@ else
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         // TODO add your handling code here:
-        int safe = JOptionPane.showConfirmDialog(null, "Are You Sure?!!","Closing Form!",   JOptionPane.YES_NO_CANCEL_OPTION);
+        int safe = JOptionPane.showConfirmDialog(null, "Are You Sure?!!", "Closing Form!", JOptionPane.YES_NO_CANCEL_OPTION);
 
-        if(safe == JOptionPane.YES_OPTION){
+        if (safe == JOptionPane.YES_OPTION) {
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);//yes
 
         } else if (safe == JOptionPane.CANCEL_OPTION) {
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//cancel
         } else {
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//no
-}
+        }
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void menunewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menunewActionPerformed

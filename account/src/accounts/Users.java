@@ -249,7 +249,7 @@ public class Users extends javax.swing.JInternalFrame {
 //    }
     //خالی کردن
     private void empty() {
-
+        txtCode.enable(true);
         txtCode.setText("");
         txtCode.setText(null);
         txtFirstName.setText("");
@@ -285,6 +285,8 @@ public class Users extends javax.swing.JInternalFrame {
         //عکس
         lblpath.setText("null");
         //combomoneytype.setSelectedItem(null);
+        _idpic = "0";
+
         last();
         paging_Table();
         NonQuery();
@@ -442,13 +444,13 @@ public class Users extends javax.swing.JInternalFrame {
         BtnBrows1 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        comboPosition = new javax.swing.JComboBox<>();
+        comboPosition = new javax.swing.JComboBox<String>();
         txtPassword = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        combogroups = new javax.swing.JComboBox<>();
+        combogroups = new javax.swing.JComboBox<String>();
         checktime = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
         checkBoxTree = new com.jidesoft.swing.CheckBoxTree();
@@ -461,6 +463,7 @@ public class Users extends javax.swing.JInternalFrame {
         radioEmployee = new javax.swing.JRadioButton();
         radioworker = new javax.swing.JRadioButton();
         jLabel21 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         lblsearch = new javax.swing.JLabel();
         txtsearch = new javax.swing.JTextField();
@@ -468,7 +471,7 @@ public class Users extends javax.swing.JInternalFrame {
         radioactivesearch = new javax.swing.JRadioButton();
         radioInactivesearch = new javax.swing.JRadioButton();
         radioallsearch = new javax.swing.JRadioButton();
-        comboSearch = new javax.swing.JComboBox<>();
+        comboSearch = new javax.swing.JComboBox<String>();
         radioemp = new javax.swing.JRadioButton();
         radiowork = new javax.swing.JRadioButton();
         dateserach = new com.toedter.calendar.JDateChooser();
@@ -744,9 +747,7 @@ public class Users extends javax.swing.JInternalFrame {
 
             }
         ));
-        datatable.setCellSelectionEnabled(false);
         datatable.setGridColor(new java.awt.Color(102, 255, 0));
-        datatable.setRowSelectionAllowed(true);
         datatable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 datatableMouseClicked(evt);
@@ -783,7 +784,9 @@ public class Users extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        BtnBrows1.setFont(new java.awt.Font("Cambria", 3, 14)); // NOI18N
         BtnBrows1.setText("Browse...");
+        BtnBrows1.setNextFocusableComponent(radioactive);
         BtnBrows1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBrows1ActionPerformed(evt);
@@ -799,11 +802,14 @@ public class Users extends javax.swing.JInternalFrame {
         comboPosition.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
 
         txtPassword.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        txtPassword.setNextFocusableComponent(BtnBrows1);
 
         jLabel16.setFont(new java.awt.Font("Cambria", 3, 14)); // NOI18N
         jLabel16.setText("Password:");
 
         txtUserName.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        txtUserName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtUserName.setNextFocusableComponent(txtPassword);
         txtUserName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserNameActionPerformed(evt);
@@ -1191,12 +1197,20 @@ public class Users extends javax.swing.JInternalFrame {
         jLabel21.setFont(new java.awt.Font("Cambria", 3, 14)); // NOI18N
         jLabel21.setText("Job:");
 
+        jButton1.setFont(new java.awt.Font("Cambria", 3, 14)); // NOI18N
+        jButton1.setText("remove pic");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelmainLayout = new javax.swing.GroupLayout(jPanelmain);
         jPanelmain.setLayout(jPanelmainLayout);
         jPanelmainLayout.setHorizontalGroup(
             jPanelmainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelmainLayout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelmainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelmainLayout.createSequentialGroup()
                         .addComponent(jLabel21)
@@ -1229,16 +1243,18 @@ public class Users extends javax.swing.JInternalFrame {
                             .addComponent(txtUserName, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(checktime)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelmainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelmainLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(BtnBrows1))
-                    .addGroup(jPanelmainLayout.createSequentialGroup()
-                        .addComponent(radioactive)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelmainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelmainLayout.createSequentialGroup()
+                            .addComponent(radioactive)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(radiodeactive))
+                        .addComponent(jPanelpic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelmainLayout.createSequentialGroup()
+                        .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radiodeactive))
-                    .addComponent(jPanelpic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BtnBrows1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanelmainLayout.createSequentialGroup()
@@ -1293,9 +1309,11 @@ public class Users extends javax.swing.JInternalFrame {
                         .addGap(77, 77, 77))
                     .addGroup(jPanelmainLayout.createSequentialGroup()
                         .addComponent(jPanelpic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnBrows1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanelmainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BtnBrows1)
+                            .addComponent(jButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelmainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(radioactive)
                             .addComponent(radiodeactive))
@@ -1346,7 +1364,7 @@ public class Users extends javax.swing.JInternalFrame {
         });
 
         comboSearch.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        comboSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Code", "First Name", "Last Name", "Position", "Groups", "User Name", "End Time" }));
+        comboSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Code", "First Name", "Last Name", "Position", "Groups", "User Name", "End Time" }));
         comboSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboSearchActionPerformed(evt);
@@ -1371,7 +1389,7 @@ public class Users extends javax.swing.JInternalFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addComponent(comboSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblsearch)
@@ -1395,7 +1413,7 @@ public class Users extends javax.swing.JInternalFrame {
                     .addComponent(radiowork))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnsearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1555,7 +1573,8 @@ public void deleteuseracces() {
         empty();
         txtCode.setRequestFocusEnabled(true);
         txtCode.requestFocus();
-
+        _idpic = "0";
+        lblpath.setText("null");
     }
 
     private void btndeletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeletActionPerformed
@@ -2229,8 +2248,7 @@ public void deleteuseracces() {
 
         }
     }
-    
-    
+
     public void edit() {
         if (combogroups.getSelectedItem().equals("")) {
             JOptionPane.showMessageDialog(null,
@@ -2386,11 +2404,11 @@ public void deleteuseracces() {
                                     if (!_changejob.equals(_job)) {
                                         //ثبت درختواره در تیبل خودش
 //                                        درصورت وجود نداشتن ثبت شود ;
-                                        
-                                         if (defnodacces == 0) {
-                                        save2();
-                                        //ثبت درختواره در تیبل خودش
-                                         }
+
+                                        if (defnodacces == 0) {
+                                            save2();
+                                            //ثبت درختواره در تیبل خودش
+                                        }
                                     }
                                     //بروز رسانی درختواره
                                     edit2();
@@ -2580,10 +2598,10 @@ public void deleteuseracces() {
                                     if (radioEmployee.isSelected()) {
                                         if (!_changejob.equals(_job)) {
 
-                                           if (defnodacces == 0) {
-                                        save2();
-                                        //ثبت درختواره در تیبل خودش
-                                         }
+                                            if (defnodacces == 0) {
+                                                save2();
+                                                //ثبت درختواره در تیبل خودش
+                                            }
                                         }
                                         //بروز رسانی درختواره
                                         edit2();
@@ -2613,7 +2631,11 @@ public void deleteuseracces() {
                     ex.printStackTrace();
                 }
             }
+            _idpic = "0";
+            lblpath.setText("null");
         }
+        _idpic = "0";
+        lblpath.setText("null");
     }
 
 
@@ -2762,7 +2784,15 @@ public void deleteuseracces() {
 
     private void datatableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datatableMouseClicked
         // TODO add your handling code here:
-        //empty();
+
+        //عکس
+        //jPanel6.setPreferredSize(new Dimension(162, 173));
+        jPanelpic.setPreferredSize(new Dimension(177, 240));
+        lblpic.setIcon(new ImageIcon("lib\\Personell_Pic.png"));
+        jPanelpic.add(lblpic);
+        validate();
+        //عکس
+
         jDateChooser.setDate(null);
 
         checktime.setSelected(false);
@@ -2781,11 +2811,14 @@ public void deleteuseracces() {
         int i = datatable.getSelectedRow();
 
         lblID.setText(datatable.getValueAt(i, 0).toString());
+        _idpic = datatable.getValueAt(i, 0).toString();
         System.out.println(lblID.getText());
         txtCode.setText(datatable.getValueAt(i, 1).toString());
+        txtCode.enable(false);
         lblcode.setText(datatable.getValueAt(i, 1).toString());
         txtFirstName.setText(datatable.getValueAt(i, 2).toString());
         txtLastName.setText(datatable.getValueAt(i, 3).toString());
+        comboPosition.setSelectedItem(datatable.getValueAt(i, 4).toString());
 
         if (datatable.getValueAt(i, 5).equals("1")) {
 
@@ -3020,7 +3053,7 @@ public void deleteuseracces() {
                     } else {
                         //عکس
                         //jPanel6.setPreferredSize(new Dimension(162, 173));
-                        JOptionPane.showMessageDialog(null, "The user has no photo");
+//                        JOptionPane.showMessageDialog(null, "The user has no photo");
                         jPanelpic.setPreferredSize(new Dimension(177, 240));
                         lblpic.setIcon(new ImageIcon("lib\\Personell_Pic.png"));
                         jPanelpic.add(lblpic);
@@ -3098,6 +3131,7 @@ public void deleteuseracces() {
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // TODO add your handling code here:
+        Position();
 
         last();
         NonQuery();
@@ -3913,9 +3947,9 @@ public void deleteuseracces() {
                             lbl_error.setText(txtCode.getText() + "  ثبت شد!");
                             if (radioEmployee.isSelected()) {
                                 if (defnodacces == 0) {
-                                        save2();
-                                        //ثبت درختواره در تیبل خودش
-                                         }
+                                    save2();
+                                    //ثبت درختواره در تیبل خودش
+                                }
                             }
                         } else {
                             System.out.println("unsucessfull to upload image.");
@@ -3940,6 +3974,8 @@ public void deleteuseracces() {
 
             }
             def = 0;
+            _idpic = "0";
+            lblpath.setText("null");
         }
     }
     private void btnregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregisterActionPerformed
@@ -4830,6 +4866,28 @@ public void deleteuseracces() {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserNameActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String pic = null;
+        //عکس
+        //jPanel6.setPreferredSize(new Dimension(162, 173));
+        jPanelpic.setPreferredSize(new Dimension(177, 240));
+        lblpic.setIcon(new ImageIcon("lib\\Personell_Pic.png"));
+        jPanelpic.add(lblpic);
+//        validate();
+        //عکس
+        String sql = "UPDATE users SET `pic` = null WHERE `id`='" + _idpic + "'";
+        sql = String.format(sql, pic, _idpic);
+
+        Clas.class_register obj = new Clas.class_register();
+        obj.NonQuery(sql);
+        last();
+        paging_Table();
+        NonQuery();
+        _idpic = "0";
+        lblpath.setText("null");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBrows1;
@@ -4855,6 +4913,7 @@ public void deleteuseracces() {
     private javax.swing.JComboBox<String> combogroups;
     private javax.swing.JTable datatable;
     private com.toedter.calendar.JDateChooser dateserach;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -4917,10 +4976,11 @@ public void deleteuseracces() {
     private javax.swing.JTextField txtsearch;
     // End of variables declaration//GEN-END:variables
 
-    int defnodacces=0;
+    int defnodacces = 0;
     int def = 0;
     String _active = "0";
     String _checktime = "0";
     String _job = "0";
     String _changejob = "0";
+    String _idpic = "0";
 }
