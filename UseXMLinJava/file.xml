@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<company>
+
+	<Customer ID="1">
+		<author>p</author>
+		<email>t</email>
+		<headline>n</headline>
+	</Customer>
+	
+	<Customer ID="2">
+		<author>s</author>
+		<email>d</email>
+		<headline>a</headline>
+	</Customer>
+	<Customer ID="3">
+		<author>x</author>
+		<email>c</email>
+		<headline>z</headline>
+	</Customer>
+		
+		
+
+
+
+<Customer ID="4">
+<headline>n</headline>
+<author>p</author>
+<email>t</email>
+</Customer>
+</company>
