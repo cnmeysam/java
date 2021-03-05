@@ -204,7 +204,7 @@ public class WorkWithXML extends javax.swing.JFrame {
         return null;
     }
 
-    public void insertTableRows(DefaultTableModel tableModel,Document doc) {
+    public void insertTableRows(DefaultTableModel tableModel, Document doc) {
 
         try {
             Element root = doc.getDocumentElement();
@@ -578,6 +578,7 @@ public class WorkWithXML extends javax.swing.JFrame {
         if (xml.exists() && xml.length() != 0) {
             delete();
             DefaultXMLTableModel();
+            empty();
         } else {
             JOptionPane.showMessageDialog(null,
                     "Data file not found",
@@ -622,28 +623,28 @@ public class WorkWithXML extends javax.swing.JFrame {
                         flag = "1";
 
                         if ("headline".equals(element.getNodeName())) {
-                            if(txtheadline.getText().equals("")){
-                                 element.setTextContent("null");
-                            }else{
-                            element.setTextContent(txtheadline.getText());
+                            if (txtheadline.getText().equals("")) {
+                                element.setTextContent("null");
+                            } else {
+                                element.setTextContent(txtheadline.getText());
                             }
 
                         }
                         //اگر نود آوثر پیدا کرد آوثر آپدیت شود
                         if ("author".equals(element.getNodeName())) {
-                           if(txtauthor.getText().equals("")){
-                                 element.setTextContent("null");
-                            }else{
-                            element.setTextContent(txtauthor.getText());
+                            if (txtauthor.getText().equals("")) {
+                                element.setTextContent("");
+                            } else {
+                                element.setTextContent(txtauthor.getText());
                             }
                         }
-                         if(txtemail.getText().equals("")){
-                                 element.setTextContent("null");
-                            }else{
-                        if ("email".equals(element.getNodeName())) {
-                            element.setTextContent(txtemail.getText());
+                        if (txtemail.getText().equals("")) {
+                            element.setTextContent("null");
+                        } else {
+                            if ("email".equals(element.getNodeName())) {
+                                element.setTextContent(txtemail.getText());
+                            }
                         }
-                         }
 
                     }
 //                    else{
@@ -702,13 +703,12 @@ public class WorkWithXML extends javax.swing.JFrame {
                             "headline Cannot be empty",
                             "Warning!",
                             JOptionPane.WARNING_MESSAGE);
-                } 
-//                else if (txtauthor.getText().equals("")) {
-//                    JOptionPane.showMessageDialog(null,
-//                            "author Cannot be empty",
-//                            "Warning!",
-//                            JOptionPane.WARNING_MESSAGE);
-//                }
+                } //                else if (txtauthor.getText().equals("")) {
+                //                    JOptionPane.showMessageDialog(null,
+                //                            "author Cannot be empty",
+                //                            "Warning!",
+                //                            JOptionPane.WARNING_MESSAGE);
+                //                }
                 else if (txtemail.getText().equals("")) {
                     JOptionPane.showMessageDialog(null,
                             "email Cannot be empty",
@@ -776,17 +776,32 @@ public class WorkWithXML extends javax.swing.JFrame {
 
                 //Customer headline
                 Element Customerheadline = doc.createElement("headline");
-                Customerheadline.appendChild(doc.createTextNode(txtheadline.getText()));
+                 if (txtheadline.getText().equals("")) {
+                     Customerheadline.appendChild(doc.createTextNode("null"));
+                } else {
+                     Customerheadline.appendChild(doc.createTextNode(txtheadline.getText()));
+                }
+               
                 newCustomer.appendChild(Customerheadline);
 
                 //Customer author
                 Element Customerauthor = doc.createElement("author");
-                Customerauthor.appendChild(doc.createTextNode(txtauthor.getText()));
+                if (txtauthor.getText().equals("")) {
+                    Customerauthor.appendChild(doc.createTextNode("null"));
+                } else {
+                    Customerauthor.appendChild(doc.createTextNode(txtauthor.getText()));
+                }
+                
                 newCustomer.appendChild(Customerauthor);
 
                 //Customer email
                 Element Customeremail = doc.createElement("email");
-                Customeremail.appendChild(doc.createTextNode((txtemail.getText())));
+                if (txtemail.getText().equals("")) {
+                     Customeremail.appendChild(doc.createTextNode(("null")));
+                } else {
+                     Customeremail.appendChild(doc.createTextNode((txtemail.getText())));
+                }
+                
                 newCustomer.appendChild(Customeremail);
 
                 nList.appendChild(newCustomer);
@@ -831,12 +846,13 @@ public class WorkWithXML extends javax.swing.JFrame {
                         "headline Cannot be empty",
                         "Warning!",
                         JOptionPane.WARNING_MESSAGE);
-            } else if (txtauthor.getText().equals("")) {
-                JOptionPane.showMessageDialog(null,
-                        "author Cannot be empty",
-                        "Warning!",
-                        JOptionPane.WARNING_MESSAGE);
-            } else if (txtemail.getText().equals("")) {
+            } //            else if (txtauthor.getText().equals("")) {
+            //                JOptionPane.showMessageDialog(null,
+            //                        "author Cannot be empty",
+            //                        "Warning!",
+            //                        JOptionPane.WARNING_MESSAGE);
+            //            }
+            else if (txtemail.getText().equals("")) {
                 JOptionPane.showMessageDialog(null,
                         "email Cannot be empty",
                         "Warning!",
@@ -965,42 +981,39 @@ public class WorkWithXML extends javax.swing.JFrame {
         for (int j = 0; j < jtablexml.getColumnCount(); j++) {
             String a = jtablexml.getColumnModel().getColumn(j).getHeaderValue().toString();
             if (a == "headline") {
-                String head= jtablexml.getValueAt(i, j).toString();
-                if(head.equals("null") ){
+                String head = jtablexml.getValueAt(i, j).toString();
+                if (head.equals("null")) {
                     txtheadline.setText("");
-                }else{
-                txtheadline.setText(head);
+                } else {
+                    txtheadline.setText(head);
                 }
             }
             if (a == "author") {
                 String author = jtablexml.getValueAt(i, j).toString();
                 System.out.println(author);
-                if(author.equals("null"))
-                {
+                if (author.equals("null")) {
                     txtauthor.setText("");
-                }else{
-                txtauthor.setText(author);
+                } else {
+                    txtauthor.setText(author);
                 }
             }
             if (a == "email") {
                 String email = jtablexml.getValueAt(i, j).toString();
-                        if(email.equals("null"))
-                {
+                if (email.equals("null")) {
                     txtemail.setText("");
-                }else{
-                txtemail.setText(email);
+                } else {
+                    txtemail.setText(email);
                 }
-                
+
             }
             if (a == "ID") {
-                 String id = jtablexml.getValueAt(i, j).toString();
-                        if(id.equals("null"))
-                {
+                String id = jtablexml.getValueAt(i, j).toString();
+                if (id.equals("null")) {
                     txtID.setText("");
-                }else{
-                txtID.setText(id);
+                } else {
+                    txtID.setText(id);
                 }
-               
+
             }
 
         }

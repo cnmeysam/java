@@ -2,7 +2,7 @@
 <company>
 
 	<Customer ID="1">
-		<author>null</author>
+		<author>s</author>
 		<email>a</email>
 		<headline>a</headline>
 	</Customer>
@@ -35,14 +35,9 @@
 <author>v</author>
 <email>v</email>
 </Customer>
-<Customer ID="21">
-<headline>d</headline>
-<author>d</author>
-<email>d</email>
-</Customer>
-<Customer ID="22">
-<headline>d</headline>
-<author>d</author>
-<email>d</email>
-</Customer>
+
+
+
+
+
 </company>
