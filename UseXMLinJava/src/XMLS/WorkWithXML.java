@@ -6,6 +6,7 @@
 package XMLS;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -234,10 +237,20 @@ public class WorkWithXML extends javax.swing.JFrame {
                 if (e.getNodeType() == Element.ELEMENT_NODE) {
                     Object[] row = {value, getArticleInfo("headline", e), getArticleInfo("author", e), getArticleInfo("email", e)};
                     tableModel.addRow(row);
+                    
 
                 }
+                
+                
 //            break;
             }
+            
+            
+            
+
+
+
+
 
             tableModel.fireTableStructureChanged();
             tableModel.fireTableDataChanged();
@@ -255,6 +268,7 @@ public class WorkWithXML extends javax.swing.JFrame {
         xml = new File(System.getProperty("user.dir") + File.separator + "file.xml");
         model = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
+                
                 return false;
             }
         };
@@ -272,6 +286,10 @@ public class WorkWithXML extends javax.swing.JFrame {
         if (xml.exists() && xml.length() != 0) {
             dom = parseFile(xml);
             insertTableRows(model, dom);
+            
+            
+            
+            
         } else {
             JOptionPane.showMessageDialog(null,
                     "Data file not found",
@@ -310,7 +328,27 @@ public class WorkWithXML extends javax.swing.JFrame {
         lblgetxmlID = new javax.swing.JLabel();
         CheckBoxAoutoID = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtablexml = new javax.swing.JTable();
+        jtablexml = new javax.swing.JTable()
+        {
+
+            public Component prepareRenderer ( TableCellRenderer renderer, int row, int column ){
+                Component component = super.prepareRenderer(renderer,row,column);
+                Object value = getModel().getValueAt(row,column);
+
+                if(value.equals("null")){
+                    component.setBackground(Color.RED);
+                    component.setForeground(Color.BLACK);
+                }
+
+                else{
+                    component.setBackground(Color.WHITE);
+                    component.setForeground(Color.BLACK);
+                }
+                return component;
+            }
+        }
+
+        ;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -633,7 +671,7 @@ public class WorkWithXML extends javax.swing.JFrame {
                         //اگر نود آوثر پیدا کرد آوثر آپدیت شود
                         if ("author".equals(element.getNodeName())) {
                             if (txtauthor.getText().equals("")) {
-                                element.setTextContent("");
+                                element.setTextContent("null");
                             } else {
                                 element.setTextContent(txtauthor.getText());
                             }
@@ -776,12 +814,12 @@ public class WorkWithXML extends javax.swing.JFrame {
 
                 //Customer headline
                 Element Customerheadline = doc.createElement("headline");
-                 if (txtheadline.getText().equals("")) {
-                     Customerheadline.appendChild(doc.createTextNode("null"));
+                if (txtheadline.getText().equals("")) {
+                    Customerheadline.appendChild(doc.createTextNode("null"));
                 } else {
-                     Customerheadline.appendChild(doc.createTextNode(txtheadline.getText()));
+                    Customerheadline.appendChild(doc.createTextNode(txtheadline.getText()));
                 }
-               
+
                 newCustomer.appendChild(Customerheadline);
 
                 //Customer author
@@ -791,17 +829,17 @@ public class WorkWithXML extends javax.swing.JFrame {
                 } else {
                     Customerauthor.appendChild(doc.createTextNode(txtauthor.getText()));
                 }
-                
+
                 newCustomer.appendChild(Customerauthor);
 
                 //Customer email
                 Element Customeremail = doc.createElement("email");
                 if (txtemail.getText().equals("")) {
-                     Customeremail.appendChild(doc.createTextNode(("null")));
+                    Customeremail.appendChild(doc.createTextNode(("null")));
                 } else {
-                     Customeremail.appendChild(doc.createTextNode((txtemail.getText())));
+                    Customeremail.appendChild(doc.createTextNode((txtemail.getText())));
                 }
-                
+
                 newCustomer.appendChild(Customeremail);
 
                 nList.appendChild(newCustomer);
@@ -983,6 +1021,8 @@ public class WorkWithXML extends javax.swing.JFrame {
             if (a == "headline") {
                 String head = jtablexml.getValueAt(i, j).toString();
                 if (head.equals("null")) {
+//                     DefaultTableCellRenderer cellRender = new DefaultTableCellRenderer();
+//                    jtablexml.setBackground(Color.green);
                     txtheadline.setText("");
                 } else {
                     txtheadline.setText(head);

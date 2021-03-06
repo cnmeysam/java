@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<company>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><company>
 
 	<Customer ID="1">
-		<author>s</author>
+		<author>null</author>
 		<email>a</email>
 		<headline>a</headline>
 	</Customer>
