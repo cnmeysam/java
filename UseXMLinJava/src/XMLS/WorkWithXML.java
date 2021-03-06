@@ -334,9 +334,22 @@ public class WorkWithXML extends javax.swing.JFrame {
             public Component prepareRenderer ( TableCellRenderer renderer, int row, int column ){
                 Component component = super.prepareRenderer(renderer,row,column);
                 Object value = getModel().getValueAt(row,column);
+                if (isRowSelected(row))
+                {
+                    component.setBackground(Color.GREEN);
+                    component.setForeground(Color.BLACK);
 
-                if(value.equals("null")){
+                }
+                else if(value.equals("null")){
                     component.setBackground(Color.RED);
+                    component.setForeground(Color.BLACK);
+                }
+                else if(value.equals("")){
+                    component.setBackground(Color.YELLOW);
+                    component.setForeground(Color.BLACK);
+                }
+                else if(value.equals(null)){
+                    component.setBackground(Color.ORANGE);
                     component.setForeground(Color.BLACK);
                 }
 
