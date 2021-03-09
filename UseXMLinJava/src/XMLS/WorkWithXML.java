@@ -195,10 +195,11 @@ public class WorkWithXML extends javax.swing.JFrame {
         for (int i = 0; i < list.getLength(); ++i) {
             Node node = (Node) list.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
+                if((Node) node.getFirstChild()!=null){
                 Node child = (Node) node.getFirstChild();
 //                System.out.println(child.getTextContent().trim());
                 return child.getTextContent().trim();
-
+                }
             }
 
             return null;
@@ -245,13 +246,6 @@ public class WorkWithXML extends javax.swing.JFrame {
 //            break;
             }
             
-            
-            
-
-
-
-
-
             tableModel.fireTableStructureChanged();
             tableModel.fireTableDataChanged();
         } catch (ParserConfigurationException ex) {
@@ -330,32 +324,44 @@ public class WorkWithXML extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtablexml = new javax.swing.JTable()
         {
-
             public Component prepareRenderer ( TableCellRenderer renderer, int row, int column ){
                 Component component = super.prepareRenderer(renderer,row,column);
-                Object value = getModel().getValueAt(row,column);
-                if (isRowSelected(row))
-                {
-                    component.setBackground(Color.GREEN);
-                    component.setForeground(Color.BLACK);
-
-                }
-                else if(value.equals("null")){
-                    component.setBackground(Color.RED);
-                    component.setForeground(Color.BLACK);
-                }
-                else if(value.equals("")){
-                    component.setBackground(Color.YELLOW);
-                    component.setForeground(Color.BLACK);
-                }
-                else if(value.equals(null)){
+                if (getModel().getValueAt(row,column) == null){
                     component.setBackground(Color.ORANGE);
-                    component.setForeground(Color.BLACK);
                 }
-
-                else{
-                    component.setBackground(Color.WHITE);
-                    component.setForeground(Color.BLACK);
+                else if (getModel().getValueAt(row,column) != null){
+                    Object value = getModel().getValueAt(row,column).toString();
+                    if (isRowSelected(row))
+                    {
+                        component.setBackground(new Color(56,105,138));
+                        component.setForeground(Color.WHITE);
+                        if(value.equals("false")){
+                            component.setForeground(Color.red);
+                        }
+                        else if(value.equals("null")){
+                            component.setForeground(Color.red);
+                        }
+                    }
+                    else if(value.equals("false")){
+                        component.setBackground(Color.ORANGE);
+                        component.setForeground(Color.BLACK);
+                    }
+                    else if(value.equals("null")){
+                        component.setBackground(Color.ORANGE);
+                        component.setForeground(Color.red);
+                    }
+                    else{
+                        if (row%2 == 0){
+                            component.setBackground(new Color(255, 255, 253));
+                            component.setForeground(Color.BLACK);
+                        }
+                        else {
+                            component.setBackground(new Color(208,205,205));
+                            component.setForeground(Color.BLACK);
+                        }
+                        /*component.setBackground(Color.WHITE);
+                        component.setForeground(Color.BLACK);*/
+                    }
                 }
                 return component;
             }
@@ -501,6 +507,7 @@ public class WorkWithXML extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jtablexml.setAutoCreateRowSorter(true);
         jtablexml.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtablexmlMouseClicked(evt);
