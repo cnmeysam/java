@@ -195,10 +195,10 @@ public class WorkWithXML extends javax.swing.JFrame {
         for (int i = 0; i < list.getLength(); ++i) {
             Node node = (Node) list.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
-                if((Node) node.getFirstChild()!=null){
-                Node child = (Node) node.getFirstChild();
+                if ((Node) node.getFirstChild() != null) {
+                    Node child = (Node) node.getFirstChild();
 //                System.out.println(child.getTextContent().trim());
-                return child.getTextContent().trim();
+                    return child.getTextContent().trim();
                 }
             }
 
@@ -238,14 +238,12 @@ public class WorkWithXML extends javax.swing.JFrame {
                 if (e.getNodeType() == Element.ELEMENT_NODE) {
                     Object[] row = {value, getArticleInfo("headline", e), getArticleInfo("author", e), getArticleInfo("email", e)};
                     tableModel.addRow(row);
-                    
 
                 }
-                
-                
+
 //            break;
             }
-            
+
             tableModel.fireTableStructureChanged();
             tableModel.fireTableDataChanged();
         } catch (ParserConfigurationException ex) {
@@ -262,7 +260,7 @@ public class WorkWithXML extends javax.swing.JFrame {
         xml = new File(System.getProperty("user.dir") + File.separator + "file.xml");
         model = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
-                
+
                 return false;
             }
         };
@@ -280,10 +278,7 @@ public class WorkWithXML extends javax.swing.JFrame {
         if (xml.exists() && xml.length() != 0) {
             dom = parseFile(xml);
             insertTableRows(model, dom);
-            
-            
-            
-            
+
         } else {
             JOptionPane.showMessageDialog(null,
                     "Data file not found",
@@ -324,6 +319,12 @@ public class WorkWithXML extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtablexml = new javax.swing.JTable()
         {
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
             public Component prepareRenderer ( TableCellRenderer renderer, int row, int column ){
                 Component component = super.prepareRenderer(renderer,row,column);
                 if (getModel().getValueAt(row,column) == null){
@@ -1039,44 +1040,50 @@ public class WorkWithXML extends javax.swing.JFrame {
         for (int j = 0; j < jtablexml.getColumnCount(); j++) {
             String a = jtablexml.getColumnModel().getColumn(j).getHeaderValue().toString();
             if (a == "headline") {
-                String head = jtablexml.getValueAt(i, j).toString();
-                if (head.equals("null")) {
+                if (jtablexml.getValueAt(i, j) != null) {
+                    String head = jtablexml.getValueAt(i, j).toString();
+                    if (head.equals("null")) {
 //                     DefaultTableCellRenderer cellRender = new DefaultTableCellRenderer();
 //                    jtablexml.setBackground(Color.green);
-                    txtheadline.setText("");
-                } else {
-                    txtheadline.setText(head);
+                        txtheadline.setText("");
+                    } else {
+                        txtheadline.setText(head);
+                    }
                 }
             }
             if (a == "author") {
-                String author = jtablexml.getValueAt(i, j).toString();
-                System.out.println(author);
-                if (author.equals("null")) {
-                    txtauthor.setText("");
-                } else {
-                    txtauthor.setText(author);
+                if (jtablexml.getValueAt(i, j) != null) {
+                    String author = jtablexml.getValueAt(i, j).toString();
+                    System.out.println(author);
+                    if (author.equals("null")) {
+                        txtauthor.setText("");
+                    } else {
+                        txtauthor.setText(author);
+                    }
                 }
             }
             if (a == "email") {
-                String email = jtablexml.getValueAt(i, j).toString();
-                if (email.equals("null")) {
-                    txtemail.setText("");
-                } else {
-                    txtemail.setText(email);
+                if (jtablexml.getValueAt(i, j) != null) {
+                    String email = jtablexml.getValueAt(i, j).toString();
+                    if (email.equals("null")) {
+                        txtemail.setText("");
+                    } else {
+                        txtemail.setText(email);
+                    }
                 }
-
             }
             if (a == "ID") {
-                String id = jtablexml.getValueAt(i, j).toString();
-                if (id.equals("null")) {
-                    txtID.setText("");
-                } else {
-                    txtID.setText(id);
+                if (jtablexml.getValueAt(i, j) != null) {
+                    String id = jtablexml.getValueAt(i, j).toString();
+                    if (id.equals("null")) {
+                        txtID.setText("");
+                    } else {
+                        txtID.setText(id);
+                    }
                 }
-
             }
-
         }
+
     }//GEN-LAST:event_jtablexmlMouseClicked
 
     private void CheckBoxAoutoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxAoutoIDActionPerformed
